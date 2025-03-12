@@ -1,13 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Outlet } from "react-router"
+import Header from "./components/Header"
 
 
 function App() {
   return (
-    <div>
-      <h1 className='bg-red-300  w-full'>Hello Medilink</h1>
-      <h1>This is medical appointment website</h1>
+    <div className="bg-slate-50 min-h-screen">
+      <Header />
+      <main>
+        <Outlet />
+        <h1>ยินดีต้อนรับ</h1>
+      </main>
+      
     </div>
   )
 }
