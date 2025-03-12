@@ -8,6 +8,11 @@ function App() {
     <div>
       <h1 className='bg-red-300  w-full'>Hello Medilink</h1>
       <h1>This is medical appointment website</h1>
+      <h1>This is medical appointment website</h1>
+      <h1>This is medical appointment website</h1>
+      <h1>This is medical appointment website</h1>
+      <h1>This is medical appointment website</h1>
+      <button className="btn">Default</button>
     </div>
   )
 }
