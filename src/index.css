@@ -1,14 +1,52 @@
-@import 'tailwindcss';
-@plugin "daisyui";
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* DaisyUI plugin should be added inside tailwind.config.js, not here */
 @layer base {
+  :root {
+    --font-sans: "Noto Sans Thai", sans-serif;
+
+    /* Colors */
+    --color-base-100: oklch(98% 0.02 240);
+    --color-base-200: oklch(95% 0.03 240);
+    --color-base-300: oklch(92% 0.04 240);
+    --color-base-content: oklch(20% 0.05 240);
+    --color-primary: oklch(77.29% 0.1535 163.22);
+    --color-primary-content: oklch(98% 0.01 240);
+    --color-secondary: oklch(78.45% 0.1325 181.91);
+    --color-secondary-content: oklch(98% 0.01 200);
+    --color-accent: oklch(65% 0.25 160);
+    --color-accent-content: oklch(98% 0.01 160);
+    --color-neutral: oklch(50% 0.05 240);
+    --color-neutral-content: oklch(98% 0.01 240);
+    --color-info: oklch(70% 0.2 220);
+    --color-info-content: oklch(98% 0.01 220);
+    --color-success: oklch(65% 0.25 140);
+    --color-success-content: oklch(98% 0.01 140);
+    --color-warning: oklch(80% 0.25 80);
+    --color-warning-content: oklch(20% 0.05 80);
+    --color-error: oklch(65% 0.3 30);
+    --color-error-content: oklch(98% 0.01 30);
+
+    /* Border Radius */
+    --radius-selector: 1rem;
+    --radius-field: 8px;
+    --radius-box: 0.5rem;
+
+    /* Base Sizes */
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+
+    /* Border Size */
+    --border: 1px;
+
+    /* Effects */
+    --depth: 1;
+    --noise: 0;
+  }
+
   *,
   ::after,
   ::before,

@@ -1,5 +1,6 @@
 import { Outlet } from "react-router"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 
 function App() {
@@ -8,9 +9,8 @@ function App() {
       <Header />
       <main>
         <Outlet />
-        <h1>ยินดีต้อนรับ</h1>
       </main>
-      
+      <Footer />
     </div>
   )
 }

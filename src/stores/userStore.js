@@ -2,18 +2,19 @@ import axios from "axios";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const PORT = "https://localhost:8888"
+const PORT = "http://localhost:8888"
 
 const useUserStore = create( persist((set, get) => ({
     user: null,
     token: "",
     login: async (input) => {
         const rs = await axios.post(`${PORT}/api/auth/login`, input)
-        set({token: rs.data.token, user: rs.data.user})
+        set({token: rs.data.token, user: rs.data.payload})
+        console.log(rs.data)
         return rs.data
     },
-    registerUser: async (body) => {
-        const rs = await axios.post(`${PORT}/api/auth/register`, body)
+    registerUser: async (input) => {
+        const rs = await axios.post(`${PORT}/api/auth/register`, input)
     },
     logout: () => set({token: "", user: null}),
     fetchProfile: async () => {
@@ -31,7 +32,7 @@ const useUserStore = create( persist((set, get) => ({
         }
     }
 }),{
-    name: "state",
+    name: "userStore",
     storage: createJSONStorage(()=> localStorage)
 }))
 
