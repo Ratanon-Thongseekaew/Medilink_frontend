@@ -4,6 +4,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import useUserStore from "../stores/userStore";
 import Checking from "../pages/Checking";
+import Home from "../pages/Home";
+import Appointment from "../pages/Appointment";
 import LayoutAdmin from "../components/LayoutAdmin";
 import Dashboard from "../pages/Admin/Dashboard";
 import AdminHome from "../pages/Admin/AdminHome";
@@ -14,7 +16,7 @@ import AdminDoctorManage from "../pages/Admin/AdminDoctorManage";
 import AdminHospital from "../pages/Admin/AdminHospital";
 
 const guestRouter = createBrowserRouter([
-    {path: "/", element: <p>Home</p>},
+    {path: "/", element: <Home />},
     {path: "/login", element: <Login />},
     {path: "/register", element: <Register />},
     {path: "*", element: <Navigate to="/" />},
@@ -25,7 +27,7 @@ const userRouter = createBrowserRouter([
     path: "/", element: <App />,
     children: [
         {index: true, element: <Checking />},
-        {path: "/appointment", element: <p>Appointment</p>},
+        {path: "/appointment", element: <Appointment />},
         {path: "*", element: <Navigate to="/" />}
        ]
     },
