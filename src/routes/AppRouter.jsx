@@ -4,9 +4,11 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import useUserStore from "../stores/userStore";
 import Checking from "../pages/Checking";
+import Home from "../pages/Home";
+import Appointment from "../pages/Appointment";
 
 const guestRouter = createBrowserRouter([
-    {path: "/", element: <p>Home</p>},
+    {path: "/", element: <Home />},
     {path: "/login", element: <Login />},
     {path: "/register", element: <Register />},
     {path: "*", element: <Navigate to="/" />},
@@ -17,7 +19,7 @@ const userRouter = createBrowserRouter([
     path: "/", element: <App />,
     children: [
         {index: true, element: <Checking />},
-        {path: "/appointment", element: <p>Appointment</p>},
+        {path: "/appointment", element: <Appointment />},
         {path: "*", element: <Navigate to="/" />}
        ]
     },
