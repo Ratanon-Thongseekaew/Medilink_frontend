@@ -4,6 +4,14 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import useUserStore from "../stores/userStore";
 import Checking from "../pages/Checking";
+import LayoutAdmin from "../components/LayoutAdmin";
+import Dashboard from "../pages/Admin/Dashboard";
+import AdminHome from "../pages/Admin/AdminHome";
+import AdminUser from "../pages/Admin/AdminUser";
+import AdminOnlineStore from "../pages/Admin/AminOnlineStore";
+import AdminAppointment from "../pages/Admin/AdminAppointment";
+import AdminDoctorManage from "../pages/Admin/AdminDoctorManage";
+import AdminHospital from "../pages/Admin/AdminHospital";
 
 const guestRouter = createBrowserRouter([
     {path: "/", element: <p>Home</p>},
@@ -25,10 +33,15 @@ const userRouter = createBrowserRouter([
 
 const adminRouter = createBrowserRouter([
     {
-        path: "/", element: <p>Admin</p>,
+        path: "/admin", element: <LayoutAdmin/>,
         children: [
-            {index: true, element: <p>Admin Home</p>},
-            {path: "/dashboard", element: <p>Dashboard</p>},
+            {index: true, element: <AdminHome />},
+            {path: "/admin/dashboard", element:<Dashboard />},
+            {path: "/admin/user", element:<AdminUser />},
+            {path: "/admin/online-store", element:<AdminOnlineStore/>},
+            {path: "/admin/appointment", element:<AdminAppointment/>},
+            {path: "/admin/doctor-manage", element:<AdminDoctorManage />},
+            {path: "/admin/hospital", element:<AdminHospital />},
             {path: "*", element: <Navigate to="/" />}
         ]
     }
