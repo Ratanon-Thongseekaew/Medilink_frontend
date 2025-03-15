@@ -167,9 +167,9 @@ function Checking() {
                                                 </p>
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-lg font-bold text-gray-800">12,000 บาท</span>
-                                                    <button className="bg-green-500 text-white py-2 px-4 rounded-full text-sm">
+                                                    <Link to="/package" className="btn btn-primary">
                                                         ซื้อแพ็กเกจ
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         ))}
