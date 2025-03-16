@@ -1,15 +1,15 @@
 import { CalendarDays, ChevronLeft, Gem, Hospital, Split } from "lucide-react"
 import { Link, useNavigate } from "react-router"
-import VisaImage from "../assets/payment/visa-payment.jpg"
-import PromptPay from "../assets/payment/promptpay.jpg"
+
 import BangkokHospital from "../assets/hospital/bangkok-hospital.jpg"
+import ModalPayments from "../components/ModalPayments"
 
 
 function Appointment() {
 
     const navigate = useNavigate()
 
-    const hdlAppointment = () => {
+    const hdlPayments = () => {
         navigate("/thankyou-appointment")
     }
 
@@ -77,7 +77,7 @@ function Appointment() {
                 <div className="mb-6 py-8">
                     <h3 className="text-center text-xl font-bold mb-4">เลือกวันที่และเวลานัดหมายแพทย์</h3>
                     <div className="flex items-center mx-auto mb-6 max-w-sm">
-                        <input type="date" className="border border-gray-300 rounded-lg p-2 w-full" />
+                        <input type="date" className="border border-gray-300 bg-white rounded-lg p-2 w-full" />
                         <i className="fas fa-calendar-alt text-gray-500 ml-2"></i>
                     </div>
                     <div className="grid grid-cols-5 text-center">
@@ -127,102 +127,21 @@ function Appointment() {
                 </div>
                 <div className="text-center">
                     <button 
-                        className="btn btn-primary text-lg py-6 px-6"
-                        onClick={()=>document.getElementById('paymentAppointment').showModal()}
+                        className="btn btn-secondary text-lg py-6 px-6"
+                        onClick={()=>document.getElementById('modalPayments').showModal()}
                     >นัดหมายแพทย์</button>
                 </div>
             </div>
         </div>
         {/* modal */}
-        <dialog id="paymentAppointment" className="modal">
-            <div className="modal-box bg-white">
-                <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form>
-                <h3 className="font-bold text-2xl text-emerald-400 text-center">Payment</h3>
-                <p className="pb-2 text-center">นัดหมายแพทย์</p>
-                {/* payment */}
-                <div className="max-w-md mx-auto p-6 rounded-lg">
-                    <div className="flex items-center mb-4 border p-4 rounded-2xl">
-                        <div className="avatar">
-                            <div className="w-24 h-24 rounded-full mr-4">
-                                <img src="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg" />
-                            </div>
-                        </div>
-                        <div>
-                            <h2 className="text-lg font-bold">นพ. มาโนช เตชะโชควัฒน์</h2>
-                            <p className="text-emerald-400 font-bold">100 บาท</p>
-                            <p className="text-gray-400 font-bold">วันที่และเวลานัดหมาย</p>
-                            <p className="text-gray-400">18 มีนาคม 2568 เวลา 18.00 - 19.00</p>
-                        </div>
-                    </div>
-                    <h3 className="text-lg font-bold mb-4">Add Payment Method</h3>
-                    <div className="flex space-x-4 mb-6">
-                        <div className="border-2 border-emerald-400 p-2 rounded-lg">
-                        <img
-                            src={VisaImage}
-                            alt="Visa and Mastercard logos"
-                            className="w-24"
-                        />
-                        </div>
-                        <div className="border-2 border-gray-300 p-2 rounded-lg">
-                        <img
-                            src={PromptPay}
-                            alt="PromptPay logo"
-                            className="w-24"
-                        />
-                        </div>
-                    </div>
-                    <div className="border p-4 rounded-lg">
-                        <h4 className="text-gray-700 mb-2">ข้อมูลบัตร</h4>
-                        <div className="mb-4">
-                        <input
-                            type="text"
-                            placeholder="1234 1234 1234 1234"
-                            className="w-full p-2 border rounded-lg"
-                        />
-                        <div className="flex justify-end mt-1">
-                            <img
-                            src="https://placehold.co/40x20"
-                            alt="Visa and Mastercard logos"
-                            className="w-10"
-                            />
-                        </div>
-                        </div>
-                        <div className="flex space-x-4 mb-4">
-                        <input
-                            type="text"
-                            placeholder="ดด / ปป"
-                            className="w-1/2 p-2 border rounded-lg"
-                        />
-                        <input
-                            type="text"
-                            placeholder="CVC"
-                            className="w-1/2 p-2 border rounded-lg"
-                        />
-                        </div>
-                        <div className="mb-4">
-                        <input
-                            type="text"
-                            placeholder="ชื่อ - นามสกุล"
-                            className="w-full p-2 border rounded-lg"
-                        />
-                        </div>
-                        <div className="mb-4">
-                        <select className="w-full p-2 border rounded-lg">
-                            <option>ไทย</option>
-                        </select>
-                        </div>
-                        <button 
-                            onClick={hdlAppointment}
-                            className="btn btn-primary w-full">
-                            ชำระเงิน
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </dialog>
+        <ModalPayments
+            hdlPayments={hdlPayments}
+            title="นัดหมายแพทย์"
+            actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
+            actionTitle="นพ. มาโนช เตชะโชควัฒน์"
+            actionPrice="100 บาท"
+            actionAppointment="18 มีนาคม 2568 เวลา 18.00 - 19.00"
+        />
         </>
     )
 }

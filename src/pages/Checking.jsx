@@ -41,7 +41,6 @@ function Checking() {
                 </div>
             </div>
 
-
             <div>
                 <div className="p-4 md:px-10 lg:px-20 xl:px-[120px]">
                     <form>
@@ -97,7 +96,7 @@ function Checking() {
                                 <div className="mt-6"></div>
                                 <button
                                     onClick={handleNextStep}
-                                    className='btn btn-primary text-lg py-6 px-6'
+                                    className='btn btn-secondary text-lg py-6 px-6'
                                 >วิเคราะห์อาการเบื้องต้น</button>
                             </>
                         )}
@@ -109,7 +108,7 @@ function Checking() {
                                 </div>
                                 <button
                                     onClick={handleNextStep}
-                                    className='btn btn-primary text-lg py-6 px-6'
+                                    className='btn btn-secondary text-lg py-6 px-6'
                                 >นัดหมายแพทย์ หรือดูแพ็กเกจ</button>
                             </div>
                         )}

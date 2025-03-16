@@ -16,6 +16,7 @@ import AdminDoctorManage from "../pages/Admin/AdminDoctorManage";
 import AdminHospital from "../pages/Admin/AdminHospital";
 import ThankyouAppointment from "../pages/ThankyouAppointment";
 import Package from "../pages/Package";
+import ThankyouPackage from "../pages/ThankyouPackage";
 
 const guestRouter = createBrowserRouter([
     {path: "/", element: <Home />},
@@ -31,6 +32,7 @@ const userRouter = createBrowserRouter([
         {index: true, element: <Checking />},
         {path: "/appointment", element: <Appointment />},
         {path: "/thankyou-appointment", element: <ThankyouAppointment />},
+        {path: "/thankyou-package", element: <ThankyouPackage />},
         {path: "/package", element: <Package />},
         {path: "*", element: <Navigate to="/" />}
        ]

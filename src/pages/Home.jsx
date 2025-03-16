@@ -2,7 +2,7 @@ import { Link } from "react-router"
 
 function Home() {
   return (
-    <>
+    <div className="bg-slate-100">
       <header className="bg-teal-500 py-6">
         <div className="container mx-auto flex justify-between items-center px-4 bg-white py-6 rounded-4xl">
           <div className="flex items-center">
@@ -250,7 +250,7 @@ function Home() {
           <p className="text-sm">© 2025 MediLink International. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </div>
   )
 }
 
