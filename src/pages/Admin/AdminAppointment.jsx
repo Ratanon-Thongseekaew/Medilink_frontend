@@ -1,4 +1,4 @@
-import { Calendar, ChevronDown, Clock, UserCircle } from 'lucide-react'
+import { ChevronDown, Clock, UserCircle } from 'lucide-react'
 import React from 'react'
 
 function AdminAppointment() {
