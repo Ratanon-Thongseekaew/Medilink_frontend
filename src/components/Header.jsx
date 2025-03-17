@@ -12,7 +12,7 @@ function Header() {
           src="https://res.cloudinary.com/dhzksppsh/image/upload/v1741941112/yfg8i6drbfqauvark2rl.png"
           className='w-[220px]'
          />
-        <button onClick={hdlLogout} className='btn btn-primary'>Logout</button>
+        <button onClick={hdlLogout} className='btn btn-secondary'>Logout</button>
     </div>
   )
 }

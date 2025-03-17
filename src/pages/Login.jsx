@@ -41,7 +41,7 @@ function Login() {
     }
 
     return (
-        <div className="flex min-h-screen">
+        <div className="bg-slate-100 flex min-h-screen">
             <div className="pt-24 w-[50%]">
                 <div className="p-6 md:px-10 lg:px-20 xl:px-[230px]">
                     <h1 className="text-4xl font-semibold text-center py-6 text-emerald-500">ยินดีต้อนรับ</h1>

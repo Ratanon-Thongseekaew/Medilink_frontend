@@ -1,10 +1,13 @@
 import { Link } from "react-router"
+import MarqueeVerticalUp from "../components/MarqueeVerticalUp"
+import MarqueeVerticalDown from "../components/MarqueeVerticalDown"
+import FadeOverlay from "../components/FadeOverlay"
 
 function Home() {
   return (
-    <>
-      <header className="bg-teal-500 py-6">
-        <div className="container mx-auto flex justify-between items-center px-4 bg-white py-6 rounded-4xl">
+    <div className="bg-slate-100">
+      <header className="py-4 fixed top-0 w-full z-40">
+        <div className="container mx-auto flex justify-between items-center px-4 bg-white py-2 rounded-4xl">
           <div className="flex items-center">
             <img
               src="https://res.cloudinary.com/dhzksppsh/image/upload/v1741941112/yfg8i6drbfqauvark2rl.png"
@@ -18,30 +21,59 @@ function Home() {
             <a href="#" className="hover:underline">Package & Program</a>
             <a href="#" className="hover:underline">Partner</a>
           </nav>
-          <Link to="/login" className="btn btn-primary px-8 py-8 rounded-full font-semibold text-lg">Get Started</Link>
+          <Link to="/login" className="btn btn-primary px-6 py-7 rounded-full font-semibold text-lg">Get Started</Link>
         </div>
       </header>
 
-      <section className="text-center py-16 bg-gradient-to-b from-teal-500 to-teal-300 text-white">
+      <section className="text-center h-[650px] bg-gradient-to-b from-[#2DD4BF] to-slate-100 text-white">
         <div className="container mx-auto px-4">
-          <span className="bg-white text-teal-500 px-4 py-1 rounded-full text-sm font-semibold">#1 Healthcare Solution</span>
-          <h1 className="text-4xl font-bold mt-4">
-            ส่งต่อการรักษา ด้วยบริการจาก <span className="text-teal-900">MediLink AI</span>
-          </h1>
-          <p className="mt-4 text-lg">
-            วิเคราะห์อาหาร พบหมอหนึ่ง พร้อมเทคโนโลยีการวิเคราะห์การรักษา ด้วยคุณภาพและทีมบริหารของเรา จะช่วยให้คุณได้รับการรักษาได้อย่างง่ายดาย
-          </p>
-          <div className="mt-8 space-x-4">
-            <a href="#" className="bg-white text-teal-500 px-6 py-3 rounded-full font-semibold">Learn more</a>
-            <a href="#" className="bg-teal-700 text-white px-6 py-3 rounded-full font-semibold">Get Started</a>
+          <div className="grid grid-cols-2">
+            <div className="text-left pt-[180px]">
+              <span className="bg-white text-emerald-400 px-4 py-1 rounded-full text-sm font-semibold">#1 Healthcare Solution</span>
+              <h1 className="text-4xl font-bold mt-8 mb-4 text-black">
+                ส่งต่อการรักษา ด้วยบริการ
+              </h1>
+              <h2 className="text-4xl font-bold text-black">จาก <span className="text-emerald-600">MediLink AI</span></h2>
+              <p className="mt-4 text-lg text-gray-600">
+                วิเคราะห์อาหาร พบหมอหนึ่ง พร้อมเทคโนโลยีการวิเคราะห์การรักษา <br/>ด้วยคุณภาพและทีมบริหารของเรา จะช่วยให้คุณได้รับการรักษา<br/>ได้อย่างง่ายดาย
+              </p>
+              <div className="mt-8 space-x-4">
+                <a href="#learn" className="bg-transparent text-emerald-400 border border-emerald-400 px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black">Learn more</a>
+                <Link to="/login" className="btn btn-primary px-6 py-6 rounded-full font-semibold text-lg">Get Started</Link>
+              </div>
+            </div>
+            <div className="overflow-hidden h-[450px] mt-[140px] relative">
+              <div className="grid grid-cols-3 gap-6 h-full">
+                {/** Column 1 */}
+                <div className="h-full">
+                  <MarqueeVerticalUp />
+                  {/* Fade Overlay */}
+                  <FadeOverlay />
+                </div>
+
+                {/** Column 2 */}
+                <div className="h-full">
+                  <MarqueeVerticalDown />
+                  {/* Fade Overlay */}
+                  <FadeOverlay />
+                </div>
+
+                {/** Column 3 */}
+                <div className="h-full">
+                  <MarqueeVerticalUp />
+                  {/* Fade Overlay */}
+                  <FadeOverlay />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section id="learn" className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            5 Feature <span className="text-teal-500">MediLink AI</span>
+            5 Feature <span className="text-emerald-400">MediLink AI</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
@@ -96,7 +128,7 @@ function Home() {
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            ยอดฮิต <span className="text-teal-500">Doctor</span>
+            ยอดฮิต <span className="text-emerald-400">Doctor</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
@@ -146,7 +178,7 @@ function Home() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            ยอดฮิต <span className="text-teal-500">Package and Program</span>
+            ยอดฮิต <span className="text-emerald-400">Package and Program</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -240,7 +272,7 @@ function Home() {
         </div>
       </section>
 
-      <footer className="bg-teal-500 py-6">
+      <footer className="bg-[#2DD4BF] py-6">
         <div className="container mx-auto text-center text-white">
           <img
             src="https://res.cloudinary.com/dhzksppsh/image/upload/v1741941112/yfg8i6drbfqauvark2rl.png"
@@ -250,7 +282,7 @@ function Home() {
           <p className="text-sm">© 2025 MediLink International. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </div>
   )
 }
 
