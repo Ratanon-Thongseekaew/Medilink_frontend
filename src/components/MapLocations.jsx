@@ -1,46 +1,63 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useState } from "react";
-
-const locations = [
-    { name: "โรงพยาบาลศิริราช", coords: [13.7563, 100.4889], description: "โรงพยาบาลเก่าแก่และใหญ่ที่สุดในไทย ตั้งอยู่ริมแม่น้ำเจ้าพระยา" },
-    { name: "โรงพยาบาลจุฬาลงกรณ์", coords: [13.7333, 100.5322], description: "โรงพยาบาลระดับแนวหน้าของไทย ภายใต้สภากาชาดไทย" },
-    { name: "โรงพยาบาลรามาธิบดี", coords: [13.7664, 100.5241], description: "โรงพยาบาลมหาวิทยาลัยแพทยศาสตร์ชั้นนำของไทย" },
-    { name: "โรงพยาบาลพระมงกุฎเกล้า", coords: [13.7691, 100.5263], description: "โรงพยาบาลทหารบกที่ให้บริการแก่ประชาชนทั่วไป" },
-    { name: "โรงพยาบาลกรุงเทพ", coords: [13.7449, 100.5787], description: "โรงพยาบาลเอกชนระดับสากลในกรุงเทพฯ" },
-    { name: "โรงพยาบาลบำรุงราษฎร์", coords: [13.7473, 100.5531], description: "โรงพยาบาลเอกชนที่ได้รับความนิยมจากชาวต่างชาติ" },
-    { name: "โรงพยาบาลศรีนครินทร์", coords: [16.4735, 102.8210], description: "โรงพยาบาลหลักของภาคอีสาน ตั้งอยู่ที่ขอนแก่น" },
-    { name: "โรงพยาบาลมหาราชนครเชียงใหม่", coords: [18.7876, 98.9853], description: "โรงพยาบาลหลักของภาคเหนือ ภายใต้มหาวิทยาลัยเชียงใหม่" },
-    { name: "โรงพยาบาลสวนดอก", coords: [18.7890, 98.9746], description: "โรงพยาบาลขนาดใหญ่ในเชียงใหม่ มีความเชี่ยวชาญหลายสาขา" },
-    { name: "โรงพยาบาลนครพิงค์", coords: [18.8384, 98.9722], description: "โรงพยาบาลศูนย์ในเชียงใหม่ ให้บริการประชาชนทั่วไป" },
-    { name: "โรงพยาบาลสงขลานครินทร์", coords: [7.0086, 100.4999], description: "โรงพยาบาลมหาวิทยาลัยชั้นนำของภาคใต้ ตั้งอยู่ที่หาดใหญ่" },
-    { name: "โรงพยาบาลหาดใหญ่", coords: [7.0064, 100.4762], description: "โรงพยาบาลขนาดใหญ่ในหาดใหญ่ ให้บริการครอบคลุมทุกโรค" },
-    { name: "โรงพยาบาลนครราชสีมา", coords: [14.9786, 102.0977], description: "โรงพยาบาลศูนย์ของจังหวัดนครราชสีมา" },
-    { name: "โรงพยาบาลสุราษฎร์ธานี", coords: [9.1263, 99.3290], description: "โรงพยาบาลหลักของภาคใต้ตอนบน" },
-    { name: "โรงพยาบาลอุดรธานี", coords: [17.4078, 102.7923], description: "โรงพยาบาลศูนย์ในภาคอีสานตอนบน ให้บริการครบวงจร" },
-    { name: "โรงพยาบาลเชียงรายประชานุเคราะห์", coords: [19.9081, 99.8325], description: "โรงพยาบาลศูนย์ประจำจังหวัดเชียงราย" },
-    { name: "โรงพยาบาลพุทธชินราช", coords: [16.8221, 100.2634], description: "โรงพยาบาลหลักของจังหวัดพิษณุโลก" },
-    { name: "โรงพยาบาลพระปกเกล้า", coords: [12.6004, 102.1026], description: "โรงพยาบาลศูนย์ในภาคตะวันออก ตั้งอยู่ที่จันทบุรี" },
-    { name: "โรงพยาบาลราชบุรี", coords: [13.5345, 99.8093], description: "โรงพยาบาลศูนย์ที่ให้บริการในภาคตะวันตก" },
-    { name: "โรงพยาบาลขอนแก่น", coords: [16.4296, 102.8414], description: "โรงพยาบาลขนาดใหญ่ที่รองรับผู้ป่วยในภาคอีสาน" },
-];
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { Icon } from 'leaflet'
 
 function MapLocations() {
-    const [location, setLocation] = useState(locations)
+    const [locations, setLocations] = useState([]);
+    
+    const hospitalMarker = new Icon({
+        iconUrl: 'https://res.cloudinary.com/dhzksppsh/image/upload/v1742203600/xhj5ssk8sqrhulgspbhu.png',
+        iconSize: [36, 36],
+    });
+
+    const getHospital = async () => {
+        try {
+            const rs = await axios.get("http://localhost:8888/api/hospital/hospital-location");
+            const hospitals = rs.data?.data;
+            console.log(hospitals);
+
+            const formattedLocations = hospitals.map(hospital => {
+                return {
+                    name: hospital.name,
+                    coords: [
+                        hospital.location?.latitude || 13.7563,
+                        hospital.location?.longitude || 100.5018
+                    ],
+                    description: `ที่อยู่: ${hospital.location?.address || 'ไม่พบข้อมูล'}`,
+                    contactInfo: hospital.contactInfo || null,
+                };
+            });
+
+            setLocations(formattedLocations);
+
+        } catch (error) {
+            console.log(error);
+            const errMsg = error.response?.data?.error || error.message;
+            toast.error(errMsg);
+        }
+    };
+
+    useEffect(() => {
+        getHospital();
+    }, []);
 
     return (
-        <MapContainer center={[13.7563, 100.5018]} zoom={5} className="h-[550px] w-full">
+        <MapContainer center={[13.7563, 100.5018]} zoom={12} className="h-[550px] w-full">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            {location.map((place, index) => (
-                <Marker key={index} position={place.coords}>
+            {locations.map((place, index) => (
+                <Marker key={index} position={place.coords} icon={hospitalMarker}>
                     <Popup>
-                        <strong>{place.name}</strong>
-                        <p>{place.description}</p>
+                        <strong>{place.name}</strong><br />
+                        {place.description}<br />
+                        {place.contactInfo && <span><strong>ติดต่อ:</strong> {place.contactInfo}</span>}
                     </Popup>
                 </Marker>
             ))}
         </MapContainer>
-    )
+    );
 }
 
-export default MapLocations
+export default MapLocations;

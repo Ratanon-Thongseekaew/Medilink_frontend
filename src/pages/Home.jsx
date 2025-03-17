@@ -3,12 +3,14 @@ import MarqueeVerticalUp from "../components/MarqueeVerticalUp"
 import MarqueeVerticalDown from "../components/MarqueeVerticalDown"
 import FadeOverlay from "../components/FadeOverlay"
 import MapLocations from "../components/MapLocations"
+import Marquee from "../components/Marquee"
+import FadeOverlayBrand from "../components/FadeOverlayBrand"
 
 
 function Home() {
   return (
     <div className="bg-slate-100">
-      <header className="py-4 fixed top-0 w-full z-40">
+      <header className="py-4 fixed top-0 w-full z-[9999]">
         <div className="container mx-auto flex justify-between items-center px-4 bg-white py-2 rounded-4xl">
           <div className="flex items-center">
             <img
@@ -227,47 +229,9 @@ function Home() {
               <MapLocations />
             </div>
           </div>
-          <div className="flex justify-center space-x-4 mt-8">
-            <img
-              src="https://storage.googleapis.com/a1aa/image/9XqQXLFBZir-BmYgZPEp5f80FET9SKEgtAQLuwrwlBg.jpg"
-              alt="Partner 1"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/oHrrSkKZ45lfdNjNFhDXD3errDGzQZIE2DHK14eHJEI.jpg"
-              alt="Partner 2"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/xhJxej2g7qq8WxhaCmr_jbmKrpeo9y_XT1pDP6mfv3s.jpg"
-              alt="Partner 3"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/q43vhZ_oaGvKEzFtCG4f4og3BoJegq0fplCRifYbdB0.jpg"
-              alt="Partner 4"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/seFZmUGJDslyzKQWQ4SDPXG9D2RhlB7eoEJp-P2-piM.jpg"
-              alt="Partner 5"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/7j1LfSaTt7rF4VQm-2y0gYf5xjs40TK7a1i1QALkYjY.jpg"
-              alt="Partner 6"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/QS2UxNXORzvyWr1QrrMr7W9DHi4yO796OMkthFuh8Y0.jpg"
-              alt="Partner 7"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/ePca6ogjIFNNe6stGzEhHqUocce841sxgWQBsQnNK7Y.jpg"
-              alt="Partner 8"
-              className="h-12"
-            />
+          <div className="flex justify-center space-x-4 mt-8 relative">
+            <Marquee />
+            <FadeOverlayBrand />
           </div>
         </div>
       </section>
