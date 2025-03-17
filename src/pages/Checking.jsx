@@ -1,10 +1,42 @@
 
 import { Activity, CalendarDays } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router';
 
 function Checking() {
     const [step, setStep] = useState(1)
+
+    // test
+    const [chatReply, setChatReply] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        symptom: "",
+        duration: "",
+        underlyingCondition: "",
+        underlyingConditionStatus: "มี",
+        currentAddress: "",
+    });
+
+    console.log('formData', formData)
+
+    useEffect(() => {
+        if (step === 2) {
+            setLoading(true);
+            fetch("http://localhost:8888/chat1", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            })
+                .then((res) => res.json())
+                .then((data) => setChatReply(data.chatReply))
+                .catch((error) => {
+                    console.error("Error fetching analysis:", error);
+                    setChatReply("เกิดข้อผิดพลาดในการดึงข้อมูล");
+                })
+                .finally(() => setLoading(false));
+        }
+    }, [step, formData]);
+    // test
 
     const handleNextStep = () => {
         if (step < 3) setStep(step + 1);
@@ -54,6 +86,7 @@ function Checking() {
                                             placeholder="อาการเบื้องต้น"
                                             className="input w-full bg-white mt-2"
                                             name="symptoms"
+                                            onChange={(e) => setFormData({ ...formData, symptom: e.target.value })}
                                         />
                                     </label>
                                     <label className='w-full text-left'>
@@ -63,6 +96,7 @@ function Checking() {
                                             placeholder="อาการเริ่มมากี่วัน"
                                             className="input w-full bg-white mt-2"
                                             name="symptomsDate"
+                                            onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                                         />
                                     </label>
                                 </div>
@@ -71,13 +105,32 @@ function Checking() {
                                         <label className='w-full text-left flex flex-col gap-4'>
                                             โรคประจำตัว
                                             <div>
-                                                <input type="radio" name="radio-1" className="radio" defaultChecked /> มี
+                                                <input
+                                                    type="radio"
+                                                    name="radio-1"
+                                                    className="radio"
+                                                    checked={formData.underlyingConditionStatus === "ไม่มี"}
+                                                    onChange={() => setFormData({ ...formData, underlyingConditionStatus: "ไม่มี", underlyingCondition: "ไม่มี" })} /> ไม่มี
                                             </div>
                                             <div>
-                                                <input type="radio" name="radio-1" className="radio" /> ไม่มี
+                                                <input
+                                                    type="radio"
+                                                    name="radio-1"
+                                                    className="radio"
+                                                    checked={formData.underlyingConditionStatus === "มี"}
+                                                    onChange={() => setFormData({ ...formData, underlyingConditionStatus: "มี", underlyingCondition: "" })} /> มี
                                             </div>
+
                                             <div className='w-full'>
-                                                <textarea placeholder="โรคประจำตัว" className="bg-white w-full textarea textarea-md" />
+                                                <textarea
+                                                    onChange={(e) => { setFormData({ ...formData, underlyingCondition: e.target.value }) }}
+                                                    placeholder="โรคประจำตัว"
+                                                    className={`bg-white w-full textarea textarea-md ${formData.underlyingConditionStatus === "ไม่มี" ? "hidden" : ""
+                                                        } `}
+                                                    disabled={formData.underlyingConditionStatus === "ไม่มี"}
+                                                    value={formData.underlyingCondition}
+                                                />
+
                                             </div>
                                         </label>
                                     </div>
@@ -89,6 +142,7 @@ function Checking() {
                                                 placeholder="แจ้งที่อยู่ปัจจุบันของท่าน"
                                                 className="input w-full bg-white mt-2"
                                                 name="phone"
+                                                onChange={(e) => setFormData({ ...formData, currentAddress: e.target.value })}
                                             />
                                         </label>
                                     </div>
@@ -104,14 +158,41 @@ function Checking() {
                             <div className="p-6 md:px-10 lg:px-20 xl:px-32">
                                 <div className='pb-8'>
                                     <h2 className="text-2xl font-semibold text-emerald-500">ผลวิเคราะห์อาการ</h2>
-                                    <p className="mt-4 text-gray-600">ระบบกำลังวิเคราะห์อาการของคุณ โปรดรอสักครู่...</p>
+                                    {loading ? (
+                                        <p className="mt-4 text-gray-600">ระบบกำลังวิเคราะห์อาการของคุณ โปรดรอสักครู่...</p>
+                                    ) : (
+                                        <div className="mt-4 space-y-6">
+                                            {chatReply
+                                                ?.split("###") // แยกหัวข้อ
+                                                .map((section) => section.trim()) // ล้างช่องว่างที่ไม่จำเป็น
+                                                .filter((section) => section !== "") // กรองหัวข้อว่าง
+                                                .map((section, index) => {
+                                                    const lines = section.split("\n").map((line) => line.trim()); // แยกแต่ละบรรทัด
+                                                    const title = lines.shift(); // หัวข้อของหมวดหมู่
+
+                                                    return (
+                                                        <div key={index} className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-emerald-400 text-left">
+                                                            <h3 className="text-xl font-semibold text-emerald-500">{title}</h3>
+                                                            <ul className="list-disc list-inside mt-2 text-gray-700">
+                                                                {lines.map((item, idx) => (
+                                                                    <li key={idx}>{item.replace(/^\d+\.\s*/, "")}</li> // 🔥 ลบตัวเลขนำหน้าออก
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    );
+                                                })}
+                                        </div>
+                                    )}
                                 </div>
                                 <button
                                     onClick={handleNextStep}
                                     className='btn btn-secondary text-lg py-6 px-6'
-                                >นัดหมายแพทย์ หรือดูแพ็กเกจ</button>
+                                >
+                                    นัดหมายแพทย์ หรือดูแพ็กเกจ
+                                </button>
                             </div>
                         )}
+
                         {step === 3 && (
                             <div className="">
                                 <div className="mb-12">
