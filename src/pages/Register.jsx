@@ -61,7 +61,7 @@ function Register() {
     }
 
     return (
-        <div className="flex min-h-screen">
+        <div className="bg-slate-100 flex min-h-screen">
             <div className="pt-16 w-[50%]">
                 <div className="p-6">
                     <Link className="bg-white border rounded-full w-11 h-11 flex justify-center items-center" to="/login">

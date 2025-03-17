@@ -3,6 +3,31 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@layer utilities {
+  @keyframes marquee-vertical-up {
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  .animate-marquee-vertical-up {
+    animation: marquee-vertical-up var(--marquee-duration) linear infinite;
+  }
+
+  @keyframes marquee-vertical-down {
+    0% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-marquee-vertical-down {
+    animation: marquee-vertical-down var(--marquee-duration) linear infinite;
+  }
+}
+
 /* DaisyUI plugin should be added inside tailwind.config.js, not here */
 @layer base {
   :root {

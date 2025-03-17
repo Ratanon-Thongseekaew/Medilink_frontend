@@ -4,6 +4,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import useUserStore from "../stores/userStore";
 import Checking from "../pages/Checking";
+import Home from "../pages/Home";
+import Appointment from "../pages/Appointment";
 import LayoutAdmin from "../components/LayoutAdmin";
 import Dashboard from "../pages/Admin/Dashboard";
 import AdminHome from "../pages/Admin/AdminHome";
@@ -17,9 +19,12 @@ import AdminListPackage from "../pages/Admin/package/AdminListPackage";
 import AdminCreatePackage from "../pages/Admin/package/AdminCreatePackage";
 import DoctorProfile from "../pages/Admin/doctor/DoctorProfile";
 import HospitalProfile from "../pages/Admin/hospital/hospitalProfile";
+import ThankyouAppointment from "../pages/ThankyouAppointment";
+import Package from "../pages/Package";
+import ThankyouPackage from "../pages/ThankyouPackage";
 
 const guestRouter = createBrowserRouter([
-    {path: "/", element: <p>Home</p>},
+    {path: "/", element: <Home />},
     {path: "/login", element: <Login />},
     {path: "/register", element: <Register />},
     {path: "*", element: <Navigate to="/" />},
@@ -30,7 +35,10 @@ const userRouter = createBrowserRouter([
     path: "/", element: <App />,
     children: [
         {index: true, element: <Checking />},
-        {path: "/appointment", element: <p>Appointment</p>},
+        {path: "/appointment", element: <Appointment />},
+        {path: "/thankyou-appointment", element: <ThankyouAppointment />},
+        {path: "/thankyou-package", element: <ThankyouPackage />},
+        {path: "/package", element: <Package />},
         {path: "*", element: <Navigate to="/" />}
        ]
     },
