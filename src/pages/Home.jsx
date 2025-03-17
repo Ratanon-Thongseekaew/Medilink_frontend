@@ -2,6 +2,8 @@ import { Link } from "react-router"
 import MarqueeVerticalUp from "../components/MarqueeVerticalUp"
 import MarqueeVerticalDown from "../components/MarqueeVerticalDown"
 import FadeOverlay from "../components/FadeOverlay"
+import MapLocations from "../components/MapLocations"
+
 
 function Home() {
   return (
@@ -218,14 +220,12 @@ function Home() {
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            พันธมิตรของเรา <span className="text-teal-500">Partner</span>
+            พันธมิตรของเรา <span className="text-emerald-400">Partner</span>
           </h2>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <img
-              src="https://storage.googleapis.com/a1aa/image/1XvRdAiwl5C494pz2T4iLPTdX-UUFfOiY4G-pdxrRZc.jpg"
-              alt="Map showing partner locations"
-              className="w-full mb-4 rounded-lg"
-            />
+          <div className="rounded-lg shadow-md">
+            <div className="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+              <MapLocations />
+            </div>
           </div>
           <div className="flex justify-center space-x-4 mt-8">
             <img
