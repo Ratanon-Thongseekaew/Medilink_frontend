@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowDown01, ChevronDown, UserCircle } from 'lucide-react'
+import { ChevronDown, UserCircle } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router'
 
@@ -18,104 +18,14 @@ function AdminUser() {
         <div className="flex">
           <UserCircle/>
           <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
+          <Link to="/admin/user-profile" className='text-blue-700 underline ml-30'>View Profile</Link>
           <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
             <p>Edit</p>
             <ChevronDown className='w-4 ml-2 ' />
           </div>
         </div>
 
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-        <div className="flex mt-5">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/*" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-
+        
 
       </div>
       
