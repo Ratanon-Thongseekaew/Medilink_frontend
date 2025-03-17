@@ -1,5 +1,5 @@
 
-import { Activity } from 'lucide-react'
+import { Activity, CalendarDays } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router';
 
@@ -116,12 +116,12 @@ function Checking() {
                             <div className="">
                                 <div className="mb-12">
                                     <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                        แพทย์ที่เรา <span className="text-green-500">แนะนำ</span>
+                                        แพทย์ที่เรา <span className="text-emerald-400">แนะนำ</span>
                                     </h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {/* Doctor Card */}
                                         {Array(6).fill().map((_, index) => (
-                                            <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
+                                            <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center relative">
                                                 <img
                                                     src="https://storage.googleapis.com/a1aa/image/gYnAGT5JDiknG7fw-wgHoEy_AIVIpIIClbFhKn0wqLI.jpg"
                                                     alt="Doctor Image"
@@ -130,13 +130,13 @@ function Checking() {
                                                     height="100"
                                                 />
                                                 <h4 className="text-lg font-bold text-gray-800 mb-2">นพ. ทาโนะ เดอะโชควีวัฒน์</h4>
-                                                <p className="text-sm text-gray-600 mb-4">อายุรศาสตร์</p>
-                                                <span className="bg-green-500 text-white py-1 px-3 rounded-full text-sm">
+                                                <p className="text-sm text-gray-400 mb-4">อายุรศาสตร์</p>
+                                                <span className="bg-emerald-400 text-white py-1 px-3 rounded-full text-sm">
                                                     อายุรศาสตร์โรคไต
                                                 </span>
-                                                <div className="mt-4">
-                                                    <Link to="/appointment" className="bg-gray-100 text-gray-600 py-2 px-4 rounded-full text-sm">
-                                                        <i className="far fa-calendar-alt mr-2"></i>
+                                                <div className="mt-12">
+                                                    <Link to="/appointment" className="bg-gray-100 text-gray-600 py-2 rounded-b-lg text-sm w-full absolute bottom-0 left-0 flex gap-2 justify-center items-center h-10 hover:bg-emerald-400 hover:text-white">
+                                                        <CalendarDays className='w-5 h-5' />
                                                         นัดหมาย
                                                     </Link>
                                                 </div>
@@ -147,7 +147,7 @@ function Checking() {
                                 {/* Recommended Packages */}
                                 <div>
                                     <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                        แพ็กเกจที่เรา <span className="text-green-500">แนะนำ</span>
+                                        แพ็กเกจที่เรา <span className="text-emerald-400">แนะนำ</span>
                                     </h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {/* Package Card */}
@@ -160,12 +160,12 @@ function Checking() {
                                                     width="300"
                                                     height="200"
                                                 />
-                                                <h4 className="text-lg font-bold text-gray-800 mb-2">แพ็กเกจตรวจหัวใจและหลอดเลือด</h4>
-                                                <p className="text-sm text-gray-600 mb-4">
+                                                <h4 className="text-left text-lg font-bold mb-2 text-[#AF9763]">แพ็กเกจตรวจหัวใจและหลอดเลือด</h4>
+                                                <p className="text-left text-sm text-gray-500 mb-4">
                                                     ตรวจสุขภาพหัวใจ คัดกรองโรคหัวใจและหลอดเลือดเบื้องต้น
                                                 </p>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-lg font-bold text-gray-800">12,000 บาท</span>
+                                                    <span className="text-lg font-bold text-emerald-400">12,000 บาท</span>
                                                     <Link to="/package" className="btn btn-primary">
                                                         ซื้อแพ็กเกจ
                                                     </Link>
