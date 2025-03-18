@@ -10,7 +10,7 @@ function Sidebar() {
       <li className="w-full mt-10">
           <Link
             to="/*"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <Home className='w-6 h-6' />
@@ -21,7 +21,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/dashboard"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <LayoutDashboard className='w-6 h-6' />
@@ -32,7 +32,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/user"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <UserRound className='w-6 h-6' />
@@ -43,7 +43,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/online-store"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <Store className='w-6 h-6' />
@@ -54,7 +54,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/appointment"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <Calendar className='w-6 h-6' />
@@ -65,7 +65,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/doctor-manage"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <GraduationCap className='w-6 h-6' />
@@ -76,7 +76,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin/hospital"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <Hospital className='w-6 h-6' />
@@ -87,7 +87,7 @@ function Sidebar() {
         <li>
           <Link
             to="/admin"
-            className="block py-2 px-4 hover:bg-cyan-600 hover:text-white"
+            className="block py-2 px-4 hover:bg-amber-500 hover:text-white"
           >
             <div className="flex gap-3 mt-3">
               <LogOut className='w-6 h-6' />

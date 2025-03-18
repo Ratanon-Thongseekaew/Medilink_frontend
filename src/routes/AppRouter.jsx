@@ -22,6 +22,10 @@ import HospitalProfile from "../pages/Admin/hospital/hospitalProfile";
 import ThankyouAppointment from "../pages/ThankyouAppointment";
 import Package from "../pages/Package";
 import ThankyouPackage from "../pages/ThankyouPackage";
+import UserCreateProfile from "../pages/Admin/userProfile/UserCreateProfile";
+import DoctorCreateProfile from "../pages/Admin/doctor/DoctorCreateProfile";
+import HospitalCreateProfile from "../pages/Admin/hospital/HospitalCreateProfile";
+
 
 const guestRouter = createBrowserRouter([
     {path: "/", element: <Home />},
@@ -46,20 +50,23 @@ const userRouter = createBrowserRouter([
 
 const adminRouter = createBrowserRouter([
     {
-        path: "/admin", element: <LayoutAdmin/>,
+        path: "/", element: <LayoutAdmin/>,
         children: [
             {index: true, element: <AdminHome />},
             {path: "/admin/dashboard", element:<Dashboard />},
             {path: "/admin/user", element:<AdminUser />},
                 {path: "/admin/user-profile", element:<UserProfile />},
+                {path: "/admin/user-create-profile", element:<UserCreateProfile />},
             {path: "/admin/online-store", element:<AdminOnlineStore/>},
                 {path: "/admin/list-package", element:<AdminListPackage/>},
                 {path: "/admin/create-package", element:<AdminCreatePackage/>},
             {path: "/admin/appointment", element:<AdminAppointment/>},
             {path: "/admin/doctor-manage", element:<AdminDoctorManage />},
                 {path: "/admin/doctor-profile", element:<DoctorProfile />},
+                {path: "/admin/doctor-create-profile", element:<DoctorCreateProfile />},
             {path: "/admin/hospital", element:<AdminHospital />},
-            {path: "/admin/hospita-profile", element:<HospitalProfile />},
+                {path: "/admin/hospita-profile", element:<HospitalProfile />},
+                {path: "/admin/hospita-create-profile", element:<HospitalCreateProfile />},
             {path: "*", element: <Navigate to="/" />}
         ]
     }

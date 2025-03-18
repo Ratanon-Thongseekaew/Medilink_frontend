@@ -1,4 +1,4 @@
-import { ChevronDown, Edit, Trash } from 'lucide-react';
+import { ChevronDown, PencilIcon, UserPen,} from 'lucide-react';
 import React from 'react'
 
 function UserProfile() {
@@ -17,10 +17,7 @@ function UserProfile() {
                     <p className="text-gray-500 whitespace-nowrap">BKK, Thailand</p>
                 </div>
                 <div className="ml-auto flex">
-                    <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-320">
-                        <p>Edit</p>
-                        <ChevronDown className='w-4 ml-2 ' />
-                    </div>
+                    <UserPen className='w-8 h-8 text-amber-500'/>
                 </div>
             </div>
             <div className="bg-white shadow rounded-lg p-4 mb-4">
@@ -30,50 +27,27 @@ function UserProfile() {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <p>Name</p>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>นางสาว สวัสดี สีชมพู</p>
                     </div>
                     <div>
                         <p>Date Of Birth</p>
-                        <input
-                            type="date"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>14/2/2000</p>
                     </div>
                     <div>
                         <p>Gender</p>
-                        <input
-                            type="text"
-                            placeholder="Gender"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Female</p>
                     </div>
                     <div>
                         <p>Age</p>
-                        <input
-                            type="text"
-                            placeholder="Age"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>25</p>
                     </div>
                     <div>
                         <p>Blood Group</p>
-                        <input
-                            type="text"
-                            placeholder="Blood Group"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>A negative</p>
                     </div>
                     <div>
                         <p>Bio</p>
-                        <input
-                            type="text"
-                            placeholder="Personal Information"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Personal Information</p>
                     </div>
                 </div>
             </div>
