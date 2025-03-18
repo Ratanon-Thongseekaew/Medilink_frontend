@@ -143,7 +143,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">นพ. ทาโร่ เทะโคโระวัตน์</h3>
               <p className="mt-2 text-gray-600">อายุรศาสตร์</p>
-              <a href="#" className="mt-4 inline-block bg-teal-500 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
+              <a href="#" className="mt-4 inline-block bg-emerald-400 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <img
@@ -153,7 +153,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">นพ. ทาโร่ เทะโคโระวัตน์</h3>
               <p className="mt-2 text-gray-600">อายุรศาสตร์</p>
-              <a href="#" className="mt-4 inline-block bg-teal-500 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
+              <a href="#" className="mt-4 inline-block bg-emerald-400 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <img
@@ -163,7 +163,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">นพ. ทาโร่ เทะโคโระวัตน์</h3>
               <p className="mt-2 text-gray-600">อายุรศาสตร์</p>
-              <a href="#" className="mt-4 inline-block bg-teal-500 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
+              <a href="#" className="mt-4 inline-block bg-emerald-400 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <img
@@ -173,7 +173,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">นพ. ทาโร่ เทะโคโระวัตน์</h3>
               <p className="mt-2 text-gray-600">อายุรศาสตร์</p>
-              <a href="#" className="mt-4 inline-block bg-teal-500 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
+              <a href="#" className="mt-4 inline-block bg-emerald-400 text-white px-4 py-2 rounded-full">ดูรายละเอียด</a>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">แพ็กเกจตรวจสุขภาพพื้นฐานและทั่วไป</h3>
               <p className="mt-2 text-gray-600">แพ็กเกจตรวจสุขภาพพื้นฐานและทั่วไป</p>
-              <p className="mt-2 text-teal-500 font-semibold">8,000 บาท</p>
+              <p className="mt-2 text-emerald-400 font-semibold">8,000 บาท</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <img
@@ -203,7 +203,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">แพ็กเกจตรวจหัวใจและหลอดเลือด</h3>
               <p className="mt-2 text-gray-600">ตรวจสุขภาพหัวใจ คัดกรองโรคหัวใจและหลอดเลือด</p>
-              <p className="mt-2 text-teal-500 font-semibold">12,000 บาท</p>
+              <p className="mt-2 text-emerald-400 font-semibold">12,000 บาท</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <img
@@ -213,7 +213,7 @@ function Home() {
               />
               <h3 className="text-xl font-semibold">แพ็กเกจตรวจหัวใจและหลอดเลือด</h3>
               <p className="mt-2 text-gray-600">ตรวจสุขภาพหัวใจ คัดกรองโรคหัวใจและหลอดเลือด</p>
-              <p className="mt-2 text-teal-500 font-semibold">12,000 บาท</p>
+              <p className="mt-2 text-emerald-400 font-semibold">12,000 บาท</p>
             </div>
           </div>
         </div>
