@@ -27,7 +27,9 @@ function ModalPayments(props) {
                             <p className="text-gray-400">{actionAppointment}</p>
                         </div>
                     </div>
+                    {/* Payment Method */}
                     <h3 className="text-lg font-bold mb-4">Add Payment Method</h3>
+                    
                     <div className="flex space-x-4 mb-6">
                         <div className="border-2 border-emerald-400 p-2 rounded-lg">
                         <img

@@ -10,7 +10,7 @@ import FadeOverlayBrand from "../components/FadeOverlayBrand"
 function Home() {
   return (
     <div className="bg-slate-100">
-      <header className="py-4 fixed top-0 w-full z-[9999]">
+      <header className="py-4 fixed top-0 w-full z-[999]">
         <div className="container mx-auto flex justify-between items-center px-4 bg-white py-2 rounded-4xl">
           <div className="flex items-center">
             <img
