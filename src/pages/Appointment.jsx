@@ -1,3 +1,8 @@
+import { CalendarDays, ChevronLeft, Gem, Hospital, Split } from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import BangkokHospital from "../assets/hospital/bangkok-hospital.jpg";
+import ModalPayments from "../components/ModalPayments";
+//pheem
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -5,6 +10,12 @@ import useScheduleStore from "../stores/doctor-schedule-store";
 
 function Appointment() {
   const { doctorId } = useParams();
+
+  const navigate = useNavigate();
+
+  const hdlPayments = () => {
+    navigate("/thankyou-appointment");
+  };
 
   const {
     doctor,
@@ -39,194 +50,170 @@ function Appointment() {
   console.log("doctor :>> ", doctor);
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      {/* <header className="flex justify-between items-center py-4">
-        <img
-          src="https://storage.googleapis.com/a1aa/image/aOiOJTd1etf6ia8-uUnvJuwRjURWq_oB5y-m7yBWo9A.jpg"
-          alt="MediLink International logo"
-          className="h-12"
-        />
-      </header> */}
-
-      <main className="bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-center text-green-500 mb-4">
-          Appointment
-        </h1>
-        {/* <button className="bg-green-500 text-white py-2 px-4 rounded-full mx-auto block mb-6">
-          นัดหมายแพทย์
-        </button> */}
-        <div className="bg-gray-50 p-4 rounded-lg shadow-md flex items-center mb-6">
-          <img
-            src={doctor.profileImg}
-            alt="Doctor's portrait"
-            className="h-24 w-24 rounded-full mr-4"
-          />
+    <>
+      <div className="mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center">
+        <div className="p-6">
+          <Link
+            className="bg-white border rounded-full w-11 h-11 flex justify-center items-center"
+            to="/login"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </Link>
+        </div>
+        <div className="w-full flex justify-center">
           <div>
-            <h2>
-              <span className="text-xl font-bold">Name : </span>
-              {doctor.firstname} {doctor.lastname}
-            </h2>
-
-            <h3 className="text-md mt-2">
-              <span className="text-xl font-bold">specialty :</span>
-              {/* {doctor.specialty.specialtyName} */}
-            </h3>
-            <h3 className="mt-2">
-              <span className="text-md font-bold">hospital : </span>
-              {/* {doctor.hospital.name} */}
-            </h3>
-            <p>{}</p>
-
-            {/* <button className="bg-green-500 text-white py-1 px-3 rounded-full mt-2">
-              คุณสมบัติแพทย์
-            </button> */}
+            <div className="flex gap-2">
+              <CalendarDays className="w-8 h-8 stroke-emerald-400" />
+              <h1 className="text-4xl text-emerald-400 font-semibold">
+                Appointment
+              </h1>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="font-semibold my-2 bg-emerald-400 text-white py-2 flex w-[220px] text-lg rounded-lg justify-center">
+                นัดหมายแพทย์
+              </div>
+            </div>
           </div>
         </div>
-        {/* <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="text-center">
-            <i className="fas fa-hospital text-3xl text-green-500 mb-2"></i>
-            <p>ศูนย์บริการ</p>
-            <p>ศูนย์บริการ, ศูนย์บริการ</p>
-          </div>
-          <div className="text-center">
-            <i className="fas fa-stethoscope text-3xl text-green-500 mb-2"></i>
-            <p>ความชำนาญเฉพาะทาง</p>
-            <p>ความชำนาญเฉพาะทาง</p>
-          </div>
-          <div className="text-center">
-            <i className="fas fa-heartbeat text-3xl text-green-500 mb-2"></i>
-            <p>สุขภาพ</p>
-            <p>สุขภาพ</p>
-          </div>
-        </div> */}
-        {/* <div className="mb-6">
-          <h3 className="text-lg font-bold mb-2">เลือกโรงพยาบาล</h3>
-          <div className="flex justify-around">
-            <img
-              src="https://storage.googleapis.com/a1aa/image/iTsQhV7AfIW7eX5IZUXPWt-vcvehHs0EpEO02n49Fk4.jpg"
-              alt="Hospital 1 logo"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/tfh55EECPCA8InPncTFPygpm5G4WaOOxXJS45NvBXSs.jpg"
-              alt="Hospital 2 logo"
-              className="h-12"
-            />
-            <img
-              src="https://storage.googleapis.com/a1aa/image/POGd1zq0e-1ipNjBGlRHCNaDIU8Cj-czYbEQW_pj6aw.jpg"
-              alt="Hospital 3 logo"
-              className="h-12"
-            />
-          </div>
-        </div> */}
-        <div className="mb-6">
-          {/* <h3 className="text-lg font-bold mb-2">เลือกวันที่และเวลา</h3>
-          <input
-            type="date"
-            className="border border-gray-300 p-2 rounded-lg w-full mb-4"
-          /> */}
-          <div>
-            <label htmlFor="date">เลือกวันที่:</label>
-            <input
-              value={selectedDate}
-              onChange={handleDateChange}
-              className="border border-gray-300 p-2 rounded-lg w-full mb-4"
-              type="date"
-              id="date"
-              min={minDate}
-              max={maxDate}
-            />
+
+        {/* นัดหมาย */}
+        <div className="max-w-5xl mx-auto py-6">
+          <div className="flex p-10 mb-10 items-center justify-between rounded-lg shadow-[0px_4px_4px_#0000000d] bg-white">
+            <div className="text-left">
+              <h3 className="text-3xl font-bold">
+                {doctor.firstname} {doctor.lastname}
+              </h3>
+              <div className="border-4 border-emerald-400 my-3 rounded-2xl"></div>
+              <p className="text-gray-400 my-2 font-semibold">อายุรศาสตร์</p>
+              <p className="text-center py-2 bg-emerald-400 text-white rounded-2xl w-40">
+                อายุรศาสตร์โรคไต
+              </p>
+            </div>
+            <div className="avatar">
+              <div className="w-36 rounded-full">
+                <img src={doctor.profileImg} />
+              </div>
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-300">
-              {/* <thead>
-                <tr>
-                  <th className="py-2 px-4 border-b">วันจันทร์ 13/4</th>
-                  <th className="py-2 px-4 border-b">วันอังคาร 14/4</th>
-                  <th className="py-2 px-4 border-b">
-                    {dayOfWeek} {selectedDate}
-                  </th>
-                  <th className="py-2 px-4 border-b">วันพฤหัสบดี 16/4</th>
-                  <th className="py-2 px-4 border-b">วันศุกร์ 17/4</th>
-                </tr>
-              </thead> */}
-              <tbody>
-                {/* <tr>
-                  <td className="py-2 px-4 border-b text-center">
-                    16:00 - 17:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    16:00 - 17:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    16:00 - 17:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    16:00 - 17:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    16:00 - 17:00
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-4 border-b text-center">
-                    17:00 - 18:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    17:00 - 18:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    17:00 - 18:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    17:00 - 18:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    17:00 - 18:00
-                  </td>
-                </tr> */}
-                <tr>
-                  <th className="py-2 px-4 border-b">
-                    {dayOfWeek} {selectedDate}
-                  </th>
-                  {/* {schedule.map((el) => {
-                    return (
-                      <td
-                        key={el.id}
-                        className="py-2 px-4 border-b text-center"
-                      >
-                        {el.Time.startTime} - {el.Time.endTime}
-                      </td>
-                    );
-                  })} */}
-                </tr>
-                {/* <tr>
-                  <td className="py-2 px-4 border-b text-center">
-                    19:00 - 20:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    19:00 - 20:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    19:00 - 20:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    19:00 - 20:00
-                  </td>
-                  <td className="py-2 px-4 border-b text-center">
-                    19:00 - 20:00
-                  </td>
-                </tr> */}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-3 gap-4 mb-6 bg-white p-10 rounded-lg shadow-[0px_4px_4px_#0000000d]">
+            <div className="flex flex-col items-start gap-1 px-4 border-r-2">
+              <Hospital className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
+              <p className="font-bold">ศูนย์เฉพาะคลินิก</p>
+              <p className="text-gray-400">ศูนย์โรคไต, ศูนย์เบาหวาน</p>
+            </div>
+            <div className="flex flex-col items-start gap-1 px-4 border-r-2">
+              <Gem className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
+              <p className="font-bold">ความชำนาญเฉพาะทางเฉพาะ</p>
+              <p className="text-gray-400">อายุรศาสตร์</p>
+            </div>
+            <div className="flex flex-col items-start gap-1 px-4">
+              <Split className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
+              <p className="font-bold">อนุสาขา</p>
+              <p className="text-gray-400">อายุรศาสตร์โรคไต</p>
+            </div>
+          </div>
+          <div className="mb-6 py-8">
+            <h3 className="text-left text-xl font-bold mb-4">
+              โรงพยาบาลในสังกัด
+            </h3>
+            <div className="flex justify-normal gap-4">
+              <img
+                src={BangkokHospital}
+                alt="Bangkok Hospital logo"
+                className="rounded-full border w-24 h-24"
+              />
+            </div>
+          </div>
+          <div className="mb-6 py-8">
+            <h3 className="text-center text-xl font-bold mb-4">
+              เลือกวันที่และเวลานัดหมายแพทย์
+            </h3>
+            <div className="flex items-center mx-auto mb-6 max-w-sm">
+              <input
+                value={selectedDate}
+                onChange={handleDateChange}
+                type="date"
+                id="date"
+                min={minDate}
+                max={maxDate}
+                className="border border-gray-300 bg-white rounded-lg p-2 w-full"
+              />
+              <i className="fas fa-calendar-alt text-gray-500 ml-2"></i>
+            </div>
+            <div className="grid grid-cols-5 text-center">
+              <div className="bg-emerald-400 text-white p-2">พุธ 12 มี.ค</div>
+              <div className="bg-emerald-400 text-white p-2">
+                พฤหัสบดี 13 มี.ค
+              </div>
+              <div className="bg-emerald-400 text-white p-2">
+                {dayOfWeek} {selectedDate}
+              </div>
+              <div className="bg-emerald-400 text-white p-2">เสาร์ 15 มี.ค</div>
+              <div className="bg-emerald-400 text-white p-2">
+                อาทิตย์ 16 มี.ค
+              </div>
+            </div>
+            <div className="grid grid-cols-5 text-center">
+              <div className="border border-gray-300 p-2">
+                <select defaultValue="Pick a color" className="select bg-white">
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                </select>
+              </div>
+              <div className="border border-gray-300 p-2">
+                <select defaultValue="Pick a color" className="select bg-white">
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                </select>
+              </div>
+              <div className="border border-gray-300 p-2">
+                <select defaultValue="Pick a color" className="select bg-white">
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                </select>
+              </div>
+              <div className="border border-gray-300 p-2">
+                <select defaultValue="Pick a color" className="select bg-white">
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                </select>
+              </div>
+              <div className="border border-gray-300 p-2">
+                <select defaultValue="Pick a color" className="select bg-white">
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                  <option>10:00 - 15:00</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="text-center">
+            <button
+              className="btn btn-secondary text-lg py-6 px-6"
+              onClick={() =>
+                document.getElementById("modalPayments").showModal()
+              }
+            >
+              นัดหมายแพทย์
+            </button>
           </div>
         </div>
-        <button className="bg-green-500 text-white py-2 px-4 rounded-full mx-auto block">
-          นัดหมายแพทย์
-        </button>
-      </main>
-    </div>
+      </div>
+      {/* modal */}
+      <ModalPayments
+        hdlPayments={hdlPayments}
+        title="นัดหมายแพทย์"
+        actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
+        actionTitle="นพ. มาโนช เตชะโชควัฒน์"
+        actionPrice="100 บาท"
+        actionAppointment="18 มีนาคม 2568 เวลา 18.00 - 19.00"
+      />
+    </>
   );
 }
 
