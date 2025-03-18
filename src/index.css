@@ -26,6 +26,16 @@
   .animate-marquee-vertical-down {
     animation: marquee-vertical-down var(--marquee-duration) linear infinite;
   }
+
+  @keyframes marquee {
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee var(--marquee-duration) linear infinite;
+  }
 }
 
 /* DaisyUI plugin should be added inside tailwind.config.js, not here */
