@@ -40,13 +40,14 @@ function Appointment() {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <header className="flex justify-between items-center py-4">
+      {/* <header className="flex justify-between items-center py-4">
         <img
           src="https://storage.googleapis.com/a1aa/image/aOiOJTd1etf6ia8-uUnvJuwRjURWq_oB5y-m7yBWo9A.jpg"
           alt="MediLink International logo"
           className="h-12"
         />
-      </header>
+      </header> */}
+
       <main className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-center text-green-500 mb-4">
           Appointment
@@ -189,7 +190,7 @@ function Appointment() {
                   <th className="py-2 px-4 border-b">
                     {dayOfWeek} {selectedDate}
                   </th>
-                  {schedule.map((el) => {
+                  {/* {schedule.map((el) => {
                     return (
                       <td
                         key={el.id}
@@ -198,7 +199,7 @@ function Appointment() {
                         {el.Time.startTime} - {el.Time.endTime}
                       </td>
                     );
-                  })}
+                  })} */}
                 </tr>
                 {/* <tr>
                   <td className="py-2 px-4 border-b text-center">
