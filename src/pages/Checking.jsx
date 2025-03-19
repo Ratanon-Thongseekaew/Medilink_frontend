@@ -74,7 +74,7 @@ console.log('askReply', askReply)
                                 {index + 1}
                             </div>
                             <p className={`mt-2 text-sm ${step >= index + 1 ? "text-emerald-400" : "text-gray-400"}`}>{text}</p>
-                            {index < 2 && <div className="w-28 border-2 rounded-[30px] relative -top-12 left-24"></div>}
+                            {index < 2 && <div className={`w-28 border-2 rounded-[30px] relative -top-12 left-24 ${step >= index + 1 ? "border-emerald-400" : "text-gray-400"}`}></div>}
                         </div>
                     ))}
                 </div>
