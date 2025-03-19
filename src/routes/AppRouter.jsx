@@ -22,6 +22,8 @@ import HospitalProfile from "../pages/Admin/hospital/hospitalProfile";
 import ThankyouAppointment from "../pages/ThankyouAppointment";
 import Package from "../pages/Package";
 import ThankyouPackage from "../pages/ThankyouPackage";
+import Checkout from "../components/Checkout";
+import CheckoutComplete from "../components/CheckoutComplete";
 
 const guestRouter = createBrowserRouter([
     {path: "/", element: <Home />},
@@ -38,6 +40,8 @@ const userRouter = createBrowserRouter([
         {path: "/appointment/:id", element: <Appointment />},
         {path: "/thankyou-appointment", element: <ThankyouAppointment />},
         {path: "/thankyou-package", element: <ThankyouPackage />},
+        {path: "/checkout", element: <Checkout />},
+        {path: "/checkout-complete/:session", element: <CheckoutComplete />},
         {path: "/package/:id", element: <Package />},
         {path: "*", element: <Navigate to="/" />}
        ]
