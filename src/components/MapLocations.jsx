@@ -5,6 +5,28 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { Icon } from 'leaflet'
 
+const defaultLocations = [
+    { 
+        name: "โรงพยาบาลศิริราช", 
+        coords: [13.7563, 100.4889], 
+        description: "โรงพยาบาลเก่าแก่และใหญ่ที่สุดในไทย ตั้งอยู่ริมแม่น้ำเจ้าพระยา", 
+        contactInfo: "02-419-7000" 
+    },
+    { 
+        name: "โรงพยาบาลจุฬาลงกรณ์", 
+        coords: [13.7333, 100.5322], 
+        description: "โรงพยาบาลระดับแนวหน้าของไทย ภายใต้สภากาชาดไทย", 
+        contactInfo: "02-256-4000" 
+    },
+    { 
+        name: "โรงพยาบาลรามาธิบดี", 
+        coords: [13.7664, 100.5241], 
+        description: "โรงพยาบาลมหาวิทยาลัยแพทยศาสตร์ชั้นนำของไทย", 
+        contactInfo: "02-201-1000" 
+    }
+    // ... เพิ่มได้ตามต้องการ
+];
+
 function MapLocations() {
     const [locations, setLocations] = useState([]);
     
@@ -37,6 +59,8 @@ function MapLocations() {
             console.log(error);
             const errMsg = error.response?.data?.error || error.message;
             toast.error(errMsg);
+
+            setLocations(defaultLocations);
         }
     };
 

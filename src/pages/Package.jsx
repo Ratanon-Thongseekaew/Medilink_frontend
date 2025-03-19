@@ -83,10 +83,10 @@ function Package() {
                 <label className="block mb-2 text-gray-600">
                   เวลาที่ต้องการใช้บริการ
                 </label>
-                    <input
-                    type="time"
-                    className="w-full p-2 mb-4 border rounded-lg"
-                    />
+                <input
+                  type="time"
+                  className="w-full p-2 mb-4 border rounded-lg"
+                />
                 <button
                   onClick={() =>
                     document.getElementById("modalPayments").showModal()
