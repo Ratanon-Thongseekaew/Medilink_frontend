@@ -39,10 +39,10 @@ const userRouter = createBrowserRouter([
     path: "/", element: <App />,
     children: [
         {index: true, element: <Checking />},
-        {path: "/appointment", element: <Appointment />},
+        {path: "/appointment/:id", element: <Appointment />},
         {path: "/thankyou-appointment", element: <ThankyouAppointment />},
         {path: "/thankyou-package", element: <ThankyouPackage />},
-        {path: "/package", element: <Package />},
+        {path: "/package/:id", element: <Package />},
         {path: "*", element: <Navigate to="/" />}
        ]
     },
