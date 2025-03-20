@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router'
 import useUserStore from '../stores/userStore'
-import { checkOutStatus } from './test'
+import { checkOutStatus } from '../stores/checkoutStore'
 
 function CheckoutComplete() {
 const navigate = useNavigate()
@@ -27,7 +27,7 @@ const navigate = useNavigate()
             console.log(res);
             console.log("success", res.data.message);
 
-navigate('/')
+navigate('/thankyou-package')
 
         } catch (error) {
 
