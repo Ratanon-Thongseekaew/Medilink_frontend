@@ -1,36 +1,65 @@
-import { ChevronDown, UserCircle } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router'
+import {Settings, Trash2} from 'lucide-react'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router'
+import useAdminUserStore from '../../stores/AdminUserStore';
+import useUserStore from '../../stores/userStore';
 
 function AdminUser() {
+  const useNavigate = useNavigate();
+  const token = useUserStore(state=> state.token)
+  const users = useAdminUserStore(state => state.users)
+  const fetchUsers = useAdminUserStore(state=>state.fetchUsers)
+  const deleteUser = useAdminUserStore(state=>state.deleteUser)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchUsers(token);
+    };
+
+    fetchData();
+  }, [fetchUsers, token]);
+
   return (
 
     //Wrap container
     <div className='flex flex-col flex-wrap ml-70'>
-
-      <button className='border bg-cyan-600 p-3 rounded-md mt-5 w-30'>
-       <p className='text-white text-sm'>+New Patient</p>
-      </button>
-        <p className='flex justify-end mr-7 text-gray-500'>1 2 3 .... 10 11 12</p>
+      <p className='flex justify-end mr-7 text-gray-500'>1 2 3 .... 10 11 12</p>
       
-      {/*wrap content */}
-      <div className="flex flex-col border border-gray-300  rounded-md w-300 h-155 p-5">
-        <div className="flex">
-          <UserCircle/>
-          <p className='ml-3'>นางสาว สวัสดี สีชมพู</p>
-          <Link to="/admin/user-profile" className='text-blue-700 underline ml-30'>View Profile</Link>
-          <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-175">
-            <p>Edit</p>
-            <ChevronDown className='w-4 ml-2 ' />
-          </div>
-        </div>
-
-        
-
+      <div className="border border-gray-300 bg-white shadow-md rounded-lg w-300 h-auto p-5">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border p-2 text-center">No.</th>
+              <th className="border p-2 text-left">Patient Name</th>
+              <th className="border p-2 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user.id} className="border">
+                <td className="border p-2 text-center">{index + 1}</td>
+                <td className="border p-2">
+                  <Link to={`/admin/user-profile/${user.id}`} className='hover:text-amber-500'>
+                    {user.firstname} {user.lastname}
+                  </Link>
+                </td>
+                <td className="border p-2 text-center">
+                  <div className="flex justify-center items-center gap-5">
+                    <Settings className='w-6 h-6 text-cyan-600 cursor-pointer' />
+                    <Trash2 
+                      className='w-6 h-6 text-red-500 cursor-pointer' 
+                      onClick={() => deleteUser(user.id, token)}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      
-      </div>
-  )
-}
+    </div>
+      );
+    }
+    
 
 export default AdminUser

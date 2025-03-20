@@ -1,7 +1,22 @@
-import { ChevronDown, Edit, Trash } from 'lucide-react';
-import React from 'react'
+import {UserPen} from 'lucide-react';
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router';
+import useUserStore from '../../../stores/userStore';
+import useAdminUserStore from '../../../stores/AdminUserStore';
 
 function UserProfile() {
+    const {id} = useParams()
+    const token = useUserStore(state=>state.token)
+    const fetchUserById = useAdminUserStore(state=>state.fetchUserById)
+    const userById = useAdminUserStore(state=>state.userById)
+
+    console.log('userById', userById)
+
+    console.log('fetchUserById', fetchUserById)
+    useEffect(()=>{
+        fetchUserById(id,token)
+    },[])
+
     return (
         <div className="p-4 ml-50">
             <h1 className="text-2xl font-bold mb-4">User Profile</h1>
@@ -12,15 +27,12 @@ function UserProfile() {
                     className="rounded-full w-20 h-20 mr-4"
                 />
                 <div className="flex-1 min-w-0">
-                    <p className="text-xl whitespace-nowrap">นางสาว สวัสดี สีชมพู</p>
-                    <p className="text-gray-500 whitespace-nowrap">Pateint</p>
-                    <p className="text-gray-500 whitespace-nowrap">BKK, Thailand</p>
+                    <p className="text-xl whitespace-nowrap">{userById?.firstname} {userById?.lastname}</p>
+                    <p className="text-gray-500 whitespace-nowrap">{userById?.role}</p>
+                    <p className="text-gray-500 whitespace-nowrap">{userById?.address}</p>
                 </div>
                 <div className="ml-auto flex">
-                    <div className="flex justify-center items-center border bg-gray-300 w-20 h-8 rounded-md ml-320">
-                        <p>Edit</p>
-                        <ChevronDown className='w-4 ml-2 ' />
-                    </div>
+                    <UserPen className='w-8 h-8 text-amber-500'/>
                 </div>
             </div>
             <div className="bg-white shadow rounded-lg p-4 mb-4">
@@ -30,50 +42,27 @@ function UserProfile() {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <p>Name</p>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>{userById?.firstname} {userById?.lastname}</p>
                     </div>
                     <div>
-                        <p>Date Of Birth</p>
-                        <input
-                            type="date"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Email</p>
+                        <p>{userById?.email}</p>
                     </div>
                     <div>
-                        <p>Gender</p>
-                        <input
-                            type="text"
-                            placeholder="Gender"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Phone</p>
+                        <p>{userById?.phone}</p>
                     </div>
                     <div>
-                        <p>Age</p>
-                        <input
-                            type="text"
-                            placeholder="Age"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Role</p>
+                        <p>{userById?.role}</p>
                     </div>
                     <div>
-                        <p>Blood Group</p>
-                        <input
-                            type="text"
-                            placeholder="Blood Group"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Created</p>
+                        <p>{userById?.createdAt}</p>
                     </div>
                     <div>
-                        <p>Bio</p>
-                        <input
-                            type="text"
-                            placeholder="Personal Information"
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300"
-                        />
+                        <p>Update</p>
+                        <p>{userById?.updatedAt}</p>
                     </div>
                 </div>
             </div>
