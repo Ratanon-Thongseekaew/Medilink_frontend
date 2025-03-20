@@ -1,7 +1,22 @@
-import { ChevronDown, PencilIcon, UserPen,} from 'lucide-react';
-import React from 'react'
+import {UserPen} from 'lucide-react';
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router';
+import useUserStore from '../../../stores/userStore';
+import useAdminUserStore from '../../../stores/AdminUserStore';
 
 function UserProfile() {
+    const {id} = useParams()
+    const token = useUserStore(state=>state.token)
+    const fetchUserById = useAdminUserStore(state=>state.fetchUserById)
+    const userById = useAdminUserStore(state=>state.userById)
+
+    console.log('userById', userById)
+
+    console.log('fetchUserById', fetchUserById)
+    useEffect(()=>{
+        fetchUserById(id,token)
+    },[])
+
     return (
         <div className="p-4 ml-50">
             <h1 className="text-2xl font-bold mb-4">User Profile</h1>
@@ -12,9 +27,9 @@ function UserProfile() {
                     className="rounded-full w-20 h-20 mr-4"
                 />
                 <div className="flex-1 min-w-0">
-                    <p className="text-xl whitespace-nowrap">นางสาว สวัสดี สีชมพู</p>
-                    <p className="text-gray-500 whitespace-nowrap">Pateint</p>
-                    <p className="text-gray-500 whitespace-nowrap">BKK, Thailand</p>
+                    <p className="text-xl whitespace-nowrap">{userById?.firstname} {userById?.lastname}</p>
+                    <p className="text-gray-500 whitespace-nowrap">{userById?.role}</p>
+                    <p className="text-gray-500 whitespace-nowrap">{userById?.address}</p>
                 </div>
                 <div className="ml-auto flex">
                     <UserPen className='w-8 h-8 text-amber-500'/>
@@ -27,27 +42,27 @@ function UserProfile() {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <p>Name</p>
-                        <p>นางสาว สวัสดี สีชมพู</p>
+                        <p>{userById?.firstname} {userById?.lastname}</p>
                     </div>
                     <div>
-                        <p>Date Of Birth</p>
-                        <p>14/2/2000</p>
+                        <p>Email</p>
+                        <p>{userById?.email}</p>
                     </div>
                     <div>
-                        <p>Gender</p>
-                        <p>Female</p>
+                        <p>Phone</p>
+                        <p>{userById?.phone}</p>
                     </div>
                     <div>
-                        <p>Age</p>
-                        <p>25</p>
+                        <p>Role</p>
+                        <p>{userById?.role}</p>
                     </div>
                     <div>
-                        <p>Blood Group</p>
-                        <p>A negative</p>
+                        <p>Created</p>
+                        <p>{userById?.createdAt}</p>
                     </div>
                     <div>
-                        <p>Bio</p>
-                        <p>Personal Information</p>
+                        <p>Update</p>
+                        <p>{userById?.updatedAt}</p>
                     </div>
                 </div>
             </div>

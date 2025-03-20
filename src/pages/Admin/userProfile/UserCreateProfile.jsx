@@ -1,10 +1,44 @@
-import React from 'react'
-import { ChevronDown, FileX, } from 'lucide-react';
+import React, { useState } from 'react'
+import useUserStore from '../../../stores/userStore'
+import { useParams } from 'react-router'
+
 
 function UserCreateProfile() {
+    // const token =useUserStore((state)=> state.token)
+    // const {UserId} =useParams
+    // const [input, setInput]=useState({
+    //     email : "",
+    //     password : "",
+    //     firstname : "",
+    //     lastname : "",
+    //     phone : "",
+    //     address : "",
+    //     role : USER,
+    //     profileImg: null, 
+    // })
+
+    // const hdlChange = (e) =>{
+    //     const { name, value } = e.target
+    //     setInput({...input, [name] : value})
+    // }
+
+    // const hdlFileChange = (e) =>{
+    //     setInput({...input, profileImg : e.target.file[0]})
+    // }
+    // const hdlSubmit = async (e) =>{
+    //     e.preventDefault()
+    //     try {
+    //         const res = await axios.post('http://localhost:8888/admin/user-create-profile')
+
+    //     } catch (error) {
+    //         console.log("adminCreateUser",error)
+    //     }
+    // }
+
     return (
         <div className="p-4 ml-50">
             <h1 className="text-2xl font-bold mb-4">User Profile</h1>
+            {/* <form onSubmit={hdlSubmit}> */}
             <div className="flex items-center mb-4">
                 <img
                     src="https://via.placeholder.com/150"
@@ -75,6 +109,7 @@ function UserCreateProfile() {
             <div className="flex justify-center">
                 <button className='border  bg-amber-500 w-30 h-10 rounded-md text-white'>Submit</button>
             </div>
+            {/* </form> */}
         </div>
     );
 };

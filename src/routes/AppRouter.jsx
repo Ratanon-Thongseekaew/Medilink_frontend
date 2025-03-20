@@ -55,7 +55,7 @@ const adminRouter = createBrowserRouter([
             {index: true, element: <AdminHome />},
             {path: "/admin/dashboard", element:<Dashboard />},
             {path: "/admin/user", element:<AdminUser />},
-                {path: "/admin/user-profile", element:<UserProfile />},
+                {path: "/admin/user-profile/:id", element:<UserProfile />},
                 {path: "/admin/user-create-profile", element:<UserCreateProfile />},
             {path: "/admin/online-store", element:<AdminOnlineStore/>},
                 {path: "/admin/list-package", element:<AdminListPackage/>},
@@ -65,8 +65,8 @@ const adminRouter = createBrowserRouter([
                 {path: "/admin/doctor-profile", element:<DoctorProfile />},
                 {path: "/admin/doctor-create-profile", element:<DoctorCreateProfile />},
             {path: "/admin/hospital", element:<AdminHospital />},
-                {path: "/admin/hospita-profile", element:<HospitalProfile />},
-                {path: "/admin/hospita-create-profile", element:<HospitalCreateProfile />},
+                {path: "/admin/hospita-profile/:id", element:<HospitalProfile />},
+                {path: "/admin/hospital-create-profile", element:<HospitalCreateProfile />},
             {path: "*", element: <Navigate to="/" />}
         ]
     }

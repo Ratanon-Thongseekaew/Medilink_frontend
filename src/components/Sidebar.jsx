@@ -36,7 +36,7 @@ function Sidebar() {
           >
             <div className="flex gap-3 mt-3">
               <UserRound className='w-6 h-6' />
-              User
+              Patient
             </div>
           </Link>
         </li>
