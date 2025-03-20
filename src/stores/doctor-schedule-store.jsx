@@ -67,8 +67,8 @@ const useScheduleStore = create((set) => ({
         doctorId,
         selectedDate
       );
-      console.log("schedule data :>> ", rs.data.schedules);
-      set({ schedule: rs.data.resulteSchedules });
+      console.log("schedule data :>> ", rs.data.groupedSchedules);
+      set({ schedule: rs.data.groupedSchedules });
     } catch (error) {
       console.log(error);
     }

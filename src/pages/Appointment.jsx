@@ -7,13 +7,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useScheduleStore from "../stores/doctor-schedule-store";
+import useAppointmentStore from "../stores/user-appointment-store";
+import { changeDayLanguage } from "../Utils/changeDayLanguage";
+import useUserStore from "../stores/userStore";
 
 function Appointment() {
   const { doctorId } = useParams();
 
+  const token = useUserStore((state) => state.token);
+
   const navigate = useNavigate();
 
-  const hdlPayments = () => {
+  const hdlPayments = (doctorId, token) => {
+    hdlCreateAppointment(doctorId, token);
     navigate("/thankyou-appointment");
   };
 
@@ -30,6 +36,13 @@ function Appointment() {
     actionGetScheduleData: getScheduleData,
   } = useScheduleStore();
 
+  const {
+    timeBox,
+    hdlTimeboxChange,
+    selectedDate: selectedAppointDate,
+    hdlCreateAppointment,
+  } = useAppointmentStore();
+
   useEffect(() => {
     getDoctorData(doctorId);
     setMinAndMaxDate();
@@ -41,13 +54,28 @@ function Appointment() {
     }
   }, [selectedDate]);
 
-  console.log("doctorId :>> ", doctorId);
+  const days = Object.keys(schedule);
+  console.log("days :>> ", days);
 
-  console.log("dayOfWeek :>> ", dayOfWeek);
+  //new Date(12-03)
 
-  console.log("selectedDate :>> ", selectedDate);
+  // groupedSchedules : {
+  // "MONDAY 12 March" : [],
+  // "TUESDAY 13 March : []
+  // }
+  // Object.keys( groupedSchedules) -->["MONDAY 11 March", "TUESDAY"]
 
-  console.log("doctor :>> ", doctor);
+  const dayswithdates = days;
+
+  // console.log("doctorId :>> ", doctorId);
+
+  // console.log("dayOfWeek :>> ", dayOfWeek);
+
+  // console.log("selectedDate :>> ", selectedDate);
+
+  // console.log("doctor :>> ", doctor);
+
+  console.log("timeBox :>> ", timeBox);
 
   return (
     <>
@@ -84,14 +112,16 @@ function Appointment() {
                 {doctor.firstname} {doctor.lastname}
               </h3>
               <div className="border-4 border-emerald-400 my-3 rounded-2xl"></div>
-              <p className="text-gray-400 my-2 font-semibold">อายุรศาสตร์</p>
+              <p className="text-gray-400 my-2 font-semibold">
+                {doctor?.specialty?.specialtyName}
+              </p>
               <p className="text-center py-2 bg-emerald-400 text-white rounded-2xl w-40">
-                อายุรศาสตร์โรคไต
+                {doctor?.hospital?.name}
               </p>
             </div>
             <div className="avatar">
               <div className="w-36 rounded-full">
-                <img src={doctor.profileImg} />
+                <img src={doctor?.profileImg} />
               </div>
             </div>
           </div>
@@ -142,54 +172,60 @@ function Appointment() {
               <i className="fas fa-calendar-alt text-gray-500 ml-2"></i>
             </div>
             <div className="grid grid-cols-5 text-center">
-              <div className="bg-emerald-400 text-white p-2">พุธ 12 มี.ค</div>
-              <div className="bg-emerald-400 text-white p-2">
-                พฤหัสบดี 13 มี.ค
-              </div>
-              <div className="bg-emerald-400 text-white p-2">
-                {dayOfWeek} {selectedDate}
-              </div>
-              <div className="bg-emerald-400 text-white p-2">เสาร์ 15 มี.ค</div>
-              <div className="bg-emerald-400 text-white p-2">
-                อาทิตย์ 16 มี.ค
-              </div>
+              {schedule.map((el) => {
+                const date = new Date(el.date).toISOString().split("T")[0];
+                return (
+                  <div className="bg-emerald-400 text-white p-2">
+                    {changeDayLanguage(el.day)} <br /> {date}
+                  </div>
+                );
+              })}
             </div>
             <div className="grid grid-cols-5 text-center">
-              <div className="border border-gray-300 p-2">
-                <select defaultValue="Pick a color" className="select bg-white">
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                </select>
-              </div>
-              <div className="border border-gray-300 p-2">
-                <select defaultValue="Pick a color" className="select bg-white">
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                </select>
-              </div>
-              <div className="border border-gray-300 p-2">
-                <select defaultValue="Pick a color" className="select bg-white">
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                </select>
-              </div>
-              <div className="border border-gray-300 p-2">
-                <select defaultValue="Pick a color" className="select bg-white">
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                </select>
-              </div>
-              <div className="border border-gray-300 p-2">
-                <select defaultValue="Pick a color" className="select bg-white">
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                  <option>10:00 - 15:00</option>
-                </select>
-              </div>
+              {schedule.map((el) => {
+                return (
+                  <div className="dropdown dropdown-bottom dropdown-end">
+                    <div tabIndex={0} role="button" className="btn m-1">
+                      {selectedAppointDate === el.date
+                        ? `${timeBox.startTime} - ${timeBox.endTime}`
+                        : "00:00 - 01:00"}
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                    >
+                      {el.timeBox.map((timeSlot) => {
+                        return (
+                          <li
+                            onClick={() => hdlTimeboxChange(timeSlot, el.date)}
+                          >
+                            {timeSlot.startTime} - {timeSlot.endTime}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                  // <div className="border border-gray-300 p-2">
+                  //   <select
+                  //     defaultValue="Pick a color"
+                  //     className="select bg-white"
+                  //     onChange={(e) =>
+                  //       hdlTimeboxChange(e.target.value, el.date)
+                  //     }
+                  //   >
+                  //     {el.timeBox.map((timeSlot) => {
+                  //       return (
+                  //         <option
+                  //           // onChange={() => hdlTimeboxChange(timeSlot, el.date)}
+                  //         >
+                  //           {timeSlot.startTime} - {timeSlot.endTime}
+                  //         </option>
+                  //       );
+                  //     })}
+                  //   </select>
+                  // </div>
+                );
+              })}
             </div>
           </div>
           <div className="text-center">
@@ -206,12 +242,12 @@ function Appointment() {
       </div>
       {/* modal */}
       <ModalPayments
-        hdlPayments={hdlPayments}
+        hdlPayments={() => hdlPayments(doctorId, token)}
         title="นัดหมายแพทย์"
         actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
         actionTitle="นพ. มาโนช เตชะโชควัฒน์"
         actionPrice="100 บาท"
-        actionAppointment="18 มีนาคม 2568 เวลา 18.00 - 19.00"
+        actionAppointment={`${selectedAppointDate} เวลา ${timeBox.startTime} - ${timeBox.endTime}`}
       />
     </>
   );
