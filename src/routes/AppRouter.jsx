@@ -23,6 +23,9 @@ import ThankyouAppointment from "../pages/ThankyouAppointment";
 import Package from "../pages/Package";
 import ThankyouPackage from "../pages/ThankyouPackage";
 import SelectDoctor from "../pages/SelectDoctor";
+import UserCreateProfile from "../pages/Admin/userProfile/UserCreateProfile";
+import DoctorCreateProfile from "../pages/Admin/doctor/DoctorCreateProfile";
+import HospitalCreateProfile from "../pages/Admin/hospital/HospitalCreateProfile";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -41,7 +44,7 @@ const userRouter = createBrowserRouter([
       { path: "/select-doctor", element: <SelectDoctor /> },
       { path: "/thankyou-appointment", element: <ThankyouAppointment /> },
       { path: "/thankyou-package", element: <ThankyouPackage /> },
-      { path: "/package", element: <Package /> },
+      { path: "/package/:id", element: <Package /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
@@ -49,21 +52,30 @@ const userRouter = createBrowserRouter([
 
 const adminRouter = createBrowserRouter([
   {
-    path: "/admin",
+    path: "/",
     element: <LayoutAdmin />,
     children: [
       { index: true, element: <AdminHome /> },
       { path: "/admin/dashboard", element: <Dashboard /> },
       { path: "/admin/user", element: <AdminUser /> },
-      { path: "/admin/user-profile", element: <UserProfile /> },
+      { path: "/admin/user-profile/:id", element: <UserProfile /> },
+      { path: "/admin/user-create-profile", element: <UserCreateProfile /> },
       { path: "/admin/online-store", element: <AdminOnlineStore /> },
       { path: "/admin/list-package", element: <AdminListPackage /> },
       { path: "/admin/create-package", element: <AdminCreatePackage /> },
       { path: "/admin/appointment", element: <AdminAppointment /> },
       { path: "/admin/doctor-manage", element: <AdminDoctorManage /> },
       { path: "/admin/doctor-profile", element: <DoctorProfile /> },
+      {
+        path: "/admin/doctor-create-profile",
+        element: <DoctorCreateProfile />,
+      },
       { path: "/admin/hospital", element: <AdminHospital /> },
-      { path: "/admin/hospita-profile", element: <HospitalProfile /> },
+      { path: "/admin/hospita-profile/:id", element: <HospitalProfile /> },
+      {
+        path: "/admin/hospital-create-profile",
+        element: <HospitalCreateProfile />,
+      },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

@@ -1,9 +1,8 @@
 import VisaImage from "../assets/payment/visa-payment.jpg";
 import PromptPay from "../assets/payment/promptpay.jpg";
-import { useParams } from "react-router";
+import { useState } from "react";
 
 function ModalPayments(props) {
-  const doctorId = useParams();
   const {
     hdlPayments,
     title,
@@ -12,12 +11,22 @@ function ModalPayments(props) {
     actionPrice,
     actionAppointment,
   } = props;
+
+  const [showPayment, setShowPayment] = useState(false);
+
+  const hdlConfirmation = () => {
+    setShowPayment(true);
+  };
+
   return (
     <dialog id="modalPayments" className="modal">
       <div className="modal-box bg-white">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <button
+            onClick={() => setShowPayment(false)}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
             ✕
           </button>
         </form>
@@ -40,62 +49,82 @@ function ModalPayments(props) {
               <p className="text-gray-400">{actionAppointment}</p>
             </div>
           </div>
-          <h3 className="text-lg font-bold mb-4">Add Payment Method</h3>
-          <div className="flex space-x-4 mb-6">
-            <div className="border-2 border-emerald-400 p-2 rounded-lg">
-              <img
-                src={VisaImage}
-                alt="Visa and Mastercard logos"
-                className="w-24"
-              />
-            </div>
-            <div className="border-2 border-gray-300 p-2 rounded-lg">
-              <img src={PromptPay} alt="PromptPay logo" className="w-24" />
-            </div>
+          <div
+            className={
+              showPayment
+                ? "hidden pb-5 flex items-center justify-center"
+                : "pb-5 flex items-center justify-center"
+            }
+          >
+            <button
+              onClick={hdlConfirmation}
+              className="btn btn-primary text-lg p-6"
+            >
+              ยืนยันการทำรายการ
+            </button>
           </div>
-          <div className="border p-4 rounded-lg">
-            <h4 className="text-gray-700 mb-2">ข้อมูลบัตร</h4>
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="1234 1234 1234 1234"
-                className="w-full p-2 border rounded-lg"
-              />
-              <div className="flex justify-end mt-1">
+          {/* Payment Method */}
+          <div className={showPayment ? "" : "hidden"}>
+            <h3 className="text-lg font-bold mb-4">Add Payment Method</h3>
+            <div className="flex space-x-4 mb-6">
+              <div className="border-2 border-emerald-400 p-2 rounded-lg">
                 <img
-                  src="https://placehold.co/40x20"
+                  src={VisaImage}
                   alt="Visa and Mastercard logos"
-                  className="w-10"
+                  className="w-24"
                 />
               </div>
+              <div className="border-2 border-gray-300 p-2 rounded-lg">
+                <img src={PromptPay} alt="PromptPay logo" className="w-24" />
+              </div>
             </div>
-            <div className="flex space-x-4 mb-4">
-              <input
-                type="text"
-                placeholder="ดด / ปป"
-                className="w-1/2 p-2 border rounded-lg"
-              />
-              <input
-                type="text"
-                placeholder="CVC"
-                className="w-1/2 p-2 border rounded-lg"
-              />
+            <div className="border p-4 rounded-lg">
+              <h4 className="text-gray-700 mb-2">ข้อมูลบัตร</h4>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="1234 1234 1234 1234"
+                  className="w-full p-2 border rounded-lg"
+                />
+                <div className="flex justify-end mt-1">
+                  <img
+                    src="https://placehold.co/40x20"
+                    alt="Visa and Mastercard logos"
+                    className="w-10"
+                  />
+                </div>
+              </div>
+              <div className="flex space-x-4 mb-4">
+                <input
+                  type="text"
+                  placeholder="ดด / ปป"
+                  className="w-1/2 p-2 border rounded-lg"
+                />
+                <input
+                  type="text"
+                  placeholder="CVC"
+                  className="w-1/2 p-2 border rounded-lg"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="ชื่อ - นามสกุล"
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+              <div className="mb-4">
+                <select className="w-full p-2 border rounded-lg">
+                  <option>ไทย</option>
+                </select>
+              </div>
+              <button
+                onClick={hdlPayments}
+                className="btn btn-secondary w-full"
+              >
+                ชำระเงิน
+              </button>
             </div>
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="ชื่อ - นามสกุล"
-                className="w-full p-2 border rounded-lg"
-              />
-            </div>
-            <div className="mb-4">
-              <select className="w-full p-2 border rounded-lg">
-                <option>ไทย</option>
-              </select>
-            </div>
-            <button onClick={hdlPayments} className="btn btn-secondary w-full">
-              ชำระเงิน
-            </button>
           </div>
         </div>
       </div>

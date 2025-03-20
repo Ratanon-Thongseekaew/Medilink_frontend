@@ -7,7 +7,9 @@ function Checking() {
 
   // test
   const [chatReply, setChatReply] = useState(null);
+  const [askReply, setAskReply] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingDoctors, setLoadingDoctors] = useState(false);
   const [formData, setFormData] = useState({
     symptom: "",
     duration: "",
@@ -21,13 +23,16 @@ function Checking() {
   useEffect(() => {
     if (step === 2) {
       setLoading(true);
-      fetch("http://localhost:8888/chat1", {
+      fetch("http://localhost:8888/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
         .then((res) => res.json())
-        .then((data) => setChatReply(data.chatReply))
+        .then((data) => {
+          setChatReply(data.chatReply);
+          setAskReply(data.askReply);
+        })
         .catch((error) => {
           console.error("Error fetching analysis:", error);
           setChatReply("เกิดข้อผิดพลาดในการดึงข้อมูล");
@@ -40,6 +45,8 @@ function Checking() {
   const handleNextStep = () => {
     if (step < 3) setStep(step + 1);
   };
+
+  console.log("askReply", askReply);
 
   return (
     <div className="mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center">
@@ -80,7 +87,11 @@ function Checking() {
                   {text}
                 </p>
                 {index < 2 && (
-                  <div className="w-28 border-2 rounded-[30px] relative -top-12 left-24"></div>
+                  <div
+                    className={`w-28 border-2 rounded-[30px] relative -top-12 left-24 ${
+                      step >= index + 1 ? "border-emerald-400" : "text-gray-400"
+                    }`}
+                  ></div>
                 )}
               </div>
             )
@@ -264,42 +275,40 @@ function Checking() {
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">
                     แพทย์ที่เรา <span className="text-emerald-400">แนะนำ</span>
                   </h3>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Doctor Card */}
-                    {Array(6)
-                      .fill()
-                      .map((_, index) => (
-                        <div
-                          key={index}
-                          className="bg-white p-6 rounded-lg shadow-md text-center relative"
-                        >
-                          <img
-                            src="https://storage.googleapis.com/a1aa/image/gYnAGT5JDiknG7fw-wgHoEy_AIVIpIIClbFhKn0wqLI.jpg"
-                            alt="Doctor Image"
-                            className="mx-auto mb-4 rounded-full"
-                            width="100"
-                            height="100"
-                          />
-                          <h4 className="text-lg font-bold text-gray-800 mb-2">
-                            นพ. ทาโนะ เดอะโชควีวัฒน์
-                          </h4>
-                          <p className="text-sm text-gray-400 mb-4">
-                            อายุรศาสตร์
-                          </p>
-                          <span className="bg-emerald-400 text-white py-1 px-3 rounded-full text-sm">
-                            อายุรศาสตร์โรคไต
-                          </span>
-                          <div className="mt-12">
-                            <Link
-                              to="/appointment"
-                              className="bg-gray-100 text-gray-600 py-2 rounded-b-lg text-sm w-full absolute bottom-0 left-0 flex gap-2 justify-center items-center h-10 hover:bg-emerald-400 hover:text-white"
-                            >
-                              <CalendarDays className="w-5 h-5" />
-                              นัดหมาย
-                            </Link>
-                          </div>
+                    {askReply?.doctors.map((doctor, index) => (
+                      <div
+                        key={index}
+                        className="bg-white p-6 rounded-lg shadow-md text-center relative"
+                      >
+                        <img
+                          src={
+                            doctor.profileImg ||
+                            "https://storage.googleapis.com/a1aa/image/gYnAGT5JDiknG7fw-wgHoEy_AIVIpIIClbFhKn0wqLI.jpg"
+                          }
+                          alt="Doctor Image"
+                          className="mx-auto mb-4 rounded-full"
+                          width="100"
+                          height="100"
+                        />
+                        <h4 className="text-lg font-bold text-gray-800 mb-2">{`นพ. ${doctor.firstname} ${doctor.lastname}`}</h4>
+                        <p className="text-sm text-gray-400 mb-4">{`${doctor.specialty}`}</p>
+                        <span className="bg-emerald-400 text-white py-1 px-3 rounded-full text-sm">
+                          {doctor.hospital}
+                        </span>
+                        <div className="mt-12">
+                          <Link
+                            to={`appointment/${doctor.id}`}
+                            className="bg-gray-100 text-gray-600 py-2 rounded-b-lg text-sm w-full absolute bottom-0 left-0 flex gap-2 justify-center items-center h-10 hover:bg-emerald-400 hover:text-white"
+                          >
+                            <CalendarDays className="w-5 h-5" />
+                            นัดหมาย
+                          </Link>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
                 {/* Recommended Packages */}
@@ -310,36 +319,40 @@ function Checking() {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Package Card */}
-                    {Array(6)
-                      .fill()
-                      .map((_, index) => (
-                        <div
-                          key={index}
-                          className="bg-white p-6 rounded-lg shadow-md"
-                        >
-                          <img
-                            src="https://storage.googleapis.com/a1aa/image/l5D5rsvM1EJdVjafaNuE_7OM7UDEXQLi7lwuSMFX71A.jpg"
-                            alt="Package Image"
-                            className="w-full h-40 object-cover mb-4 rounded-lg"
-                            width="300"
-                            height="200"
-                          />
-                          <h4 className="text-left text-lg font-bold mb-2 text-[#AF9763]">
-                            แพ็กเกจตรวจหัวใจและหลอดเลือด
-                          </h4>
-                          <p className="text-left text-sm text-gray-500 mb-4">
-                            ตรวจสุขภาพหัวใจ คัดกรองโรคหัวใจและหลอดเลือดเบื้องต้น
-                          </p>
-                          <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold text-emerald-400">
-                              12,000 บาท
-                            </span>
-                            <Link to="/package" className="btn btn-primary">
-                              ซื้อแพ็กเกจ
-                            </Link>
-                          </div>
+                    {askReply?.packages.map((pkg, index) => (
+                      <div
+                        key={index}
+                        className="bg-white p-6 rounded-lg shadow-md"
+                      >
+                        <img
+                          src={
+                            pkg.profileImg ||
+                            "https://storage.googleapis.com/a1aa/image/l5D5rsvM1EJdVjafaNuE_7OM7UDEXQLi7lwuSMFX71A.jpg"
+                          }
+                          alt="Package Image"
+                          className="w-full h-40 object-cover mb-4 rounded-lg"
+                          width="300"
+                          height="200"
+                        />
+                        <h4 className="text-left text-lg font-bold mb-2 text-[#AF9763]">
+                          {pkg.name}
+                        </h4>
+                        <p className="text-left text-sm text-gray-500 mb-4">
+                          {pkg.description}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          <span className="text-lg font-bold text-emerald-400">
+                            {pkg.price}
+                          </span>
+                          <Link
+                            to={`/package/${pkg.id}`}
+                            className="btn btn-primary"
+                          >
+                            ซื้อแพ็กเกจ
+                          </Link>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

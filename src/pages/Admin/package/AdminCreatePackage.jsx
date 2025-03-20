@@ -2,13 +2,10 @@ import { ChevronDown } from 'lucide-react'
 import React from 'react'
 
 function AdminCreatePackage() {
-  return (
-    <>
+    return (
+        <>
             <div className="p-6 ml-55 bg-white rounded-lg shadow-md">
                 <h1 className="text-2xl font-bold mb-4">ข้อมูลแพ็กเกจ</h1>
-                <div className="flex justify-center items-center border bg-gray-300 w-35 h-8 rounded-md ml-320">
-                        <button> Submit</button>
-                    </div>
                 <div className="grid grid-cols-2 gap-4 mb-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
@@ -68,9 +65,11 @@ function AdminCreatePackage() {
 
 
             </div>
-
+            <div className="flex justify-center mt-10">
+                <button className='border  bg-amber-500 w-30 h-10 rounded-md text-white'>Submit</button>
+            </div>
         </>
-  )
+    )
 }
 
 export default AdminCreatePackage
