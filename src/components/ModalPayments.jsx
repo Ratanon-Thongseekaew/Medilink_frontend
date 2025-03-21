@@ -1,3 +1,4 @@
+
 import VisaImage from "../assets/payment/visa-payment.jpg"
 import PromptPay from "../assets/payment/promptpay.jpg"
 import { useEffect, useState } from "react"
@@ -171,9 +172,44 @@ if(orderId){
                         </div>
                     </div>
                 </div>
+              </div>
+              <div className="flex space-x-4 mb-4">
+                <input
+                  type="text"
+                  placeholder="ดด / ปป"
+                  className="w-1/2 p-2 border rounded-lg"
+                />
+                <input
+                  type="text"
+                  placeholder="CVC"
+                  className="w-1/2 p-2 border rounded-lg"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="ชื่อ - นามสกุล"
+                  className="w-full p-2 border rounded-lg"
+                />
+              </div>
+              <div className="mb-4">
+                <select className="w-full p-2 border rounded-lg">
+                  <option>ไทย</option>
+                </select>
+              </div>
+              <button
+                onClick={hdlPayments}
+                className="btn btn-secondary w-full"
+              >
+                ชำระเงิน
+              </button>
             </div>
-        </dialog>
-    )
+
+          </div>
+        </div>
+      </div>
+    </dialog>
+  );
 }
 
-export default ModalPayments
+export default ModalPayments;
