@@ -10,7 +10,7 @@ import LayoutAdmin from "../components/LayoutAdmin";
 import Dashboard from "../pages/Admin/Dashboard";
 import AdminHome from "../pages/Admin/AdminHome";
 import AdminUser from "../pages/Admin/AdminUser";
-import AdminOnlineStore from "../pages/Admin/AminOnlineStore";
+import AdminOnlineStore from "../pages/Admin/AdminOnlineStore";
 import AdminAppointment from "../pages/Admin/AdminAppointment";
 import AdminDoctorManage from "../pages/Admin/AdminDoctorManage";
 import AdminHospital from "../pages/Admin/AdminHospital";
@@ -58,11 +58,11 @@ const adminRouter = createBrowserRouter([
                 {path: "/admin/user-profile/:id", element:<UserProfile />},
                 {path: "/admin/user-create-profile", element:<UserCreateProfile />},
             {path: "/admin/online-store", element:<AdminOnlineStore/>},
-                {path: "/admin/list-package", element:<AdminListPackage/>},
+                {path: "/admin/list-package/:id", element:<AdminListPackage/>},
                 {path: "/admin/create-package", element:<AdminCreatePackage/>},
             {path: "/admin/appointment", element:<AdminAppointment/>},
             {path: "/admin/doctor-manage", element:<AdminDoctorManage />},
-                {path: "/admin/doctor-profile", element:<DoctorProfile />},
+                {path: "/admin/doctor-profile/:id", element:<DoctorProfile />},
                 {path: "/admin/doctor-create-profile", element:<DoctorCreateProfile />},
             {path: "/admin/hospital", element:<AdminHospital />},
                 {path: "/admin/hospita-profile/:id", element:<HospitalProfile />},
