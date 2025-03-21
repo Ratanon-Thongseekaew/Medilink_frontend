@@ -23,6 +23,8 @@ import ThankyouAppointment from "../pages/ThankyouAppointment";
 import Package from "../pages/Package";
 import ThankyouPackage from "../pages/ThankyouPackage";
 import SelectDoctor from "../pages/SelectDoctor";
+import Checkout from "../components/Checkout";
+import CheckoutComplete from "../components/CheckoutComplete";
 import UserCreateProfile from "../pages/Admin/userProfile/UserCreateProfile";
 import DoctorCreateProfile from "../pages/Admin/doctor/DoctorCreateProfile";
 import HospitalCreateProfile from "../pages/Admin/hospital/HospitalCreateProfile";
@@ -39,16 +41,20 @@ const userRouter = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+
       { index: true, element: <Checking /> },
       { path: "/appointment/:doctorId", element: <Appointment /> },
       { path: "/select-doctor", element: <SelectDoctor /> },
       { path: "/thankyou-appointment", element: <ThankyouAppointment /> },
+               {path: "/checkout", element: <Checkout />},
+ {path: "/checkout-complete/:session", element: <CheckoutComplete />},
       { path: "/thankyou-package", element: <ThankyouPackage /> },
       { path: "/package/:id", element: <Package /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
 ]);
+
 
 const adminRouter = createBrowserRouter([
   {

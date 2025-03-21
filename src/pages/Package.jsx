@@ -4,6 +4,7 @@ import ModalPayments from "../components/ModalPayments";
 import useProgramStore from "../stores/programStore";
 import useUserStore from "../stores/userStore";
 import { useEffect, useState } from "react";
+import { date } from "zod";
 
 function Package() {
   const navigate = useNavigate();
@@ -14,6 +15,14 @@ function Package() {
   const hdlPayments = () => {
     navigate("/thankyou-package");
   };
+
+  const [formData, setFormData] = useState({
+    date: "",
+    time: "",
+
+});
+
+console.log('formData', formData)
 
   useEffect(() => {
     fetchProgram(token, id);
@@ -75,6 +84,8 @@ function Package() {
                 <input
                   type="date"
                   className="w-full p-2 mb-4 border rounded-lg"
+                  name="date"
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                 />
                 <label className="block mb-2 text-gray-600">
                   เวลาที่ต้องการใช้บริการ
@@ -82,6 +93,8 @@ function Package() {
                 <input
                   type="time"
                   className="w-full p-2 mb-4 border rounded-lg"
+                  name="time"
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                 />
                 <button
                   onClick={() =>
@@ -102,7 +115,11 @@ function Package() {
         actionImage={program?.profileImg}
         actionTitle={program?.name}
         actionPrice={program?.price.toLocaleString()}
+        programId={program?.id}
+        date={formData?.date}
+        time={formData?.time}
         actionAppointment="18 มีนาคม 2568 เวลา 18.00 - 19.00"
+
       />
     </>
   );
