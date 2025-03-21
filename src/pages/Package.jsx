@@ -118,8 +118,6 @@ console.log('formData', formData)
         programId={program?.id}
         date={formData?.date}
         time={formData?.time}
-        actionAppointment="18 มีนาคม 2568 เวลา 18.00 - 19.00"
-
       />
     </>
   );

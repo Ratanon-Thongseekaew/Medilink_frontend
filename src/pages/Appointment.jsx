@@ -242,12 +242,14 @@ function Appointment() {
       </div>
       {/* modal */}
       <ModalPayments
-        hdlPayments={() => hdlPayments(doctorId, token)}
-        title="นัดหมายแพทย์"
-        actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
-        actionTitle="นพ. มาโนช เตชะโชควัฒน์"
-        actionPrice="100 บาท"
-        actionAppointment={`${selectedAppointDate} เวลา ${timeBox.startTime} - ${timeBox.endTime}`}
+           hdlPayments={() => hdlPayments(doctorId, token)}
+           title="นัดหมายแพทย์"
+           actionImage={doctor?.profileImg}
+           actionTitle={`${doctor.firstname} ${doctor.lastname}`}
+           actionPrice="100 บาท"
+           programId={doctor.id}
+           date={`${selectedAppointDate.split("T")[0]}`}
+           time={`${timeBox.endTime}`}
       />
     </>
   );

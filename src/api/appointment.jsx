@@ -10,3 +10,12 @@ export const createAppointment = (doctorId, data, token) => {
     }
   );
 };
+
+
+export const getAppointment = async(appoitnmentId, token)=>{
+  try {
+    const rs = await axios.get()
+  } catch (error) {
+    console.log(error)
+  }
+}

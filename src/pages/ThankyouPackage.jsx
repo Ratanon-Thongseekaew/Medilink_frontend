@@ -1,8 +1,22 @@
 import { MapPin, ShoppingBasket } from 'lucide-react'
 import BangkokHospital from "../assets/hospital/bangkok-hospital.jpg"
-import { Link } from 'react-router'
+import { Link, useParams } from 'react-router'
+import useUserStore from '../stores/userStore'
+import useProgramStore from '../stores/programStore';
+import { useEffect } from 'react';
+import useOrderStore from '../stores/orderStore';
 
 function ThankyouPackage() {
+    const token = useUserStore((state) => state.token);
+    const order = useOrderStore((state)=>state.order)
+    const fetchOrder = useOrderStore((state) => state.fetchOrder);
+    const id = useParams()
+    console.log("Order Store:", useOrderStore);
+    useEffect(()=>{
+        fetchOrder(token, id);
+    },[id])
+    console.log("Checking fetchOrder function:", fetchOrder);
+    console.log("Check order",order);
   return (
     <div className='mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center'>
             <div className='w-full flex justify-center'>
