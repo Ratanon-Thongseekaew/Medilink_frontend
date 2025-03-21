@@ -5,7 +5,7 @@ import React from 'react'
 function AdminAppointment() {
   return (
     //Main wrap
-    <div className='flex flex-col flex-wrap ml-55'>
+    <div className='flex flex-col flex-wrap pl-70 pr-8 w-full'>
      
       <p className='flex justify-end mr-10 mt-2 text-gray-500'>1 2 3 .... 10 11 12</p>
 

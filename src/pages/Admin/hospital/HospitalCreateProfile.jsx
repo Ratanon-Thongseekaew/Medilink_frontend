@@ -14,10 +14,6 @@ function HospitalCreateProfile() {
         longitude: "",
         address: ""
     })
-    
-    
-    console.log(input)
-
 
     const hdlChange =(e)=> {
         setInput(prv => ({ ...prv, [e.target.name]: e.target.value }))

@@ -22,11 +22,9 @@ const useAdminHospitalStore = create(
 
             fetchHospital: async (token) => {
                 try {
-                    console.log("log b4 fetch")
                     const rs = await axios.get(`${PORT}/api/hospital/getAllHospital`, {
                         headers: { Authorization: `Bearer ${token}` },
                     })
-                    console.log("API Response:", rs.data);
                     set({ hospital: rs.data.data });
 
                 } catch (error) {
@@ -51,7 +49,7 @@ const useAdminHospitalStore = create(
                     const rs = await axios.patch(`${PORT}/api/hospital/${id}`, {
                         name: hospitalData.name,
                         contactInfo: hospitalData.contactInfo,
-                        address: hospitalData.address, // Added address
+                        address: hospitalData.address, 
                     },
                         {
                             headers: { Authorization: `Bearer ${token}` }
@@ -79,8 +77,8 @@ const useAdminHospitalStore = create(
                     }
                 }
             },
-            token: "", // Admin authentication token
-            setHospitalId: (id) => set({ hospitalId: id }),
+            
+            // setHospitalId: (id) => set({ hospitalId: id }),
         }),
         {
             name: "adminHospitalStore",

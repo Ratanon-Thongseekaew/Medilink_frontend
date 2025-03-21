@@ -18,9 +18,22 @@ const useAdminUserStore = create(
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     set({ users: rs.data.getUser });
-                    console.log("API Response:", rs.data); 
                 } catch (err) {
                     console.log(err);
+                }
+            },
+
+            updateUser: async (id, token, userData)=>{
+                try {
+                    const rs = await axios.patch(`${PORT}/api/user/${id}`,{
+                       phone: userData.phone,
+                       role: userData.role 
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                } catch (error) {
+                    console.log('error update user', error)
                 }
             },
 
@@ -35,6 +48,7 @@ const useAdminUserStore = create(
                     console.log(error)
                 }
             },
+
             deleteUser: async (userId, token) => {
                 if (window.confirm("Are you sure you want to delete this User?")) {
 
@@ -54,7 +68,6 @@ const useAdminUserStore = create(
             }
             },
 
-            token: "", // Admin authentication token
         }),
         {
             name: "adminUserStore",
