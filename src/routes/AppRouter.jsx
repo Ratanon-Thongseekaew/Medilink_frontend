@@ -24,43 +24,43 @@ import Package from "../pages/Package";
 import ThankyouPackage from "../pages/ThankyouPackage";
 
 const guestRouter = createBrowserRouter([
-    {path: "/", element: <Home />},
-    {path: "/login", element: <Login />},
-    {path: "/register", element: <Register />},
-    {path: "*", element: <Navigate to="/" />},
+    { path: "/", element: <Home /> },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "*", element: <Navigate to="/" /> },
 ])
 
 const userRouter = createBrowserRouter([
     {
-    path: "/", element: <App />,
-    children: [
-        {index: true, element: <Checking />},
-        {path: "/appointment/:id", element: <Appointment />},
-        {path: "/thankyou-appointment", element: <ThankyouAppointment />},
-        {path: "/thankyou-package", element: <ThankyouPackage />},
-        {path: "/package/:id", element: <Package />},
-        {path: "*", element: <Navigate to="/" />}
-       ]
+        path: "/", element: <App />,
+        children: [
+            { index: true, element: <Checking /> },
+            { path: "/appointment/:id", element: <Appointment /> },
+            { path: "/thankyou-appointment", element: <ThankyouAppointment /> },
+            { path: "/thankyou-package", element: <ThankyouPackage /> },
+            { path: "/package/:id", element: <Package /> },
+            { path: "*", element: <Navigate to="/" /> }
+        ]
     },
 ])
 
 const adminRouter = createBrowserRouter([
     {
-        path: "/admin", element: <LayoutAdmin/>,
+        path: "/", element: <LayoutAdmin />,
         children: [
-            {index: true, element: <AdminHome />},
-            {path: "/admin/dashboard", element:<Dashboard />},
-            {path: "/admin/user", element:<AdminUser />},
-                {path: "/admin/user-profile", element:<UserProfile />},
-            {path: "/admin/online-store", element:<AdminOnlineStore/>},
-                {path: "/admin/list-package", element:<AdminListPackage/>},
-                {path: "/admin/create-package", element:<AdminCreatePackage/>},
-            {path: "/admin/appointment", element:<AdminAppointment/>},
-            {path: "/admin/doctor-manage", element:<AdminDoctorManage />},
-                {path: "/admin/doctor-profile", element:<DoctorProfile />},
-            {path: "/admin/hospital", element:<AdminHospital />},
-            {path: "/admin/hospita-profile", element:<HospitalProfile />},
-            {path: "*", element: <Navigate to="/" />}
+            { index: true, element: <AdminHome /> },
+            { path: "/admin/dashboard", element: <Dashboard /> },
+            { path: "/admin/user", element: <AdminUser /> },
+            { path: "/admin/user-profile", element: <UserProfile /> },
+            { path: "/admin/online-store", element: <AdminOnlineStore /> },
+            { path: "/admin/list-package", element: <AdminListPackage /> },
+            { path: "/admin/create-package", element: <AdminCreatePackage /> },
+            { path: "/admin/appointment", element: <AdminAppointment /> },
+            { path: "/admin/doctor-manage", element: <AdminDoctorManage /> },
+            { path: "/admin/doctor-profile", element: <DoctorProfile /> },
+            { path: "/admin/hospital", element: <AdminHospital /> },
+            { path: "/admin/hospita-profile", element: <HospitalProfile /> },
+            { path: "*", element: <Navigate to="/" /> }
         ]
     }
 ])
@@ -71,11 +71,11 @@ export default function AppRouter() {
     const finalRouter = !user
         ? guestRouter
         : user.role === "USER"
-        ? userRouter
-        : user.role === "ADMIN"
-        ? adminRouter
-        : guestRouter;
-    
+            ? userRouter
+            : user.role === "ADMIN"
+                ? adminRouter
+                : guestRouter;
+
     return (
         <RouterProvider key={user?.id} router={finalRouter} />
     )
