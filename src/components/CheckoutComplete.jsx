@@ -50,7 +50,16 @@ navigate('/thankyou-package')
 
 
         return (
-            <div>Loading........</div>
+            <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 text-base-content">
+      {/* Spinner */}
+      <span className="loading loading-infinity loading-lg text-primary mb-6"></span>
+
+      {/* Text */}
+      <h1 className="text-2xl font-bold animate-pulse">Loading, please wait...</h1>
+
+      {/* Optional Progress Bar */}
+      <progress className="progress w-56 mt-6 bg-neutral" value="40" max="100"></progress>
+    </div>
         )
 }
 
