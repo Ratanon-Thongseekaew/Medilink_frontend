@@ -1,11 +1,10 @@
 import {Settings, Trash2} from 'lucide-react'
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import useAdminUserStore from '../../stores/AdminUserStore';
 import useUserStore from '../../stores/userStore';
 
 function AdminUser() {
-  const useNavigate = useNavigate();
   const token = useUserStore(state=> state.token)
   const users = useAdminUserStore(state => state.users)
   const fetchUsers = useAdminUserStore(state=>state.fetchUsers)
@@ -22,10 +21,10 @@ function AdminUser() {
   return (
 
     //Wrap container
-    <div className='flex flex-col flex-wrap ml-70'>
+    <div className='flex flex-col flex-wrap pl-70 pr-8 w-full'>
       <p className='flex justify-end mr-7 text-gray-500'>1 2 3 .... 10 11 12</p>
       
-      <div className="border border-gray-300 bg-white shadow-md rounded-lg w-300 h-auto p-5">
+      <div className="border border-gray-300 bg-white shadow-md rounded-lg w-full h-auto p-5">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100">

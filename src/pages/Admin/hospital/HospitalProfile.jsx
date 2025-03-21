@@ -35,10 +35,14 @@ function HospitalProfile() {
     
 
     const handleUpdate = async () => {
-        console.log('heello',id)
-        if (id) {
-            await updateHospital(id, token, hospitalData)
-            setIsEditing(false)
+        try {
+            if (id) {
+                await updateHospital(id, token, hospitalData)
+                setIsEditing(false)
+                fetchHospitalById(id,token)
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
     return (
@@ -102,7 +106,7 @@ function HospitalProfile() {
                 {isEditing && (
                     <button
                         onClick={handleUpdate}
-                        className="bg-blue-500 text-white p-2 rounded mt-4"
+                        className="bg-amber-500 text-white p-2 rounded mt-4"
                     >
                         Update
                     </button>

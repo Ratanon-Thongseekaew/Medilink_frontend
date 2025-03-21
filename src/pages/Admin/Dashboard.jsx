@@ -1,38 +1,32 @@
-import React from 'react'
+import StatsCards from '../../components/dashborard/StatsCards'
+import ActivityChart from '../../components/dashborard/ActivityChart'
+import DoctorList from '../../components/dashborard/DoctorList'
+import OnlineAppointment from '../../components/dashborard/OnlineAppointment'
+import ProgramList from '../../components/dashborard/ProgramList'
 
 function Dashboard() {
   return (
     //div Wrap Container
-    <div className='flex flex-wrap ml-70 gap-30'>
-      
-      <div className="flex flex-col items-center justify-center border border-gray-600 w-60 h-60 bg-white shadow-md rounded-xl mt-30 ">
-        <h1 className='text-8xl'>30</h1>
-        <p className='mt-10 text-2xl'>User</p>
+    <div className='pl-70 gap-30 w-full pt-8 pb-8 pr-8'>
+      <div className="bg-teal-400 text-white p-6 rounded-lg mb-6 flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold">นพ. ปวเรศ วิชัยโย</h1>
+          <p>นี่คืองานสำคัญ อัปเดต และการแจ้งเตือนของคุณ คุณสามารถตั้งค่าการแจ้งเตือนในแอปของคุณได้</p>
+        </div>
+        <img 
+          className="rounded-full w-24 h-24" 
+          src="https://res.cloudinary.com/dhzksppsh/image/upload/v1742368418/doctor-4_gel7vc.jpg"
+          alt="Doctors illustration"
+        />
       </div>
-
-      <div className="flex flex-col items-center justify-center border border-gray-600 w-60 h-60 bg-white shadow-md rounded-xl mt-30 ">
-        <h1 className='text-8xl'>12</h1>
-        <p className='mt-10 text-2xl'>Online Shop</p>
+      <StatsCards />
+      <ActivityChart />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <ProgramList />
+        <DoctorList />
       </div>
-
-      <div className="flex flex-col items-center justify-center border border-gray-600 w-60 h-60 bg-white shadow-md rounded-xl mt-30 ">
-        <h1 className='text-8xl'>100</h1>
-        <p className='mt-10 text-2xl'>Appoinment</p>
-      </div>
-
-      <div className="flex flex-col items-center justify-center border border-gray-600 w-60 h-60 bg-white shadow-md rounded-xl">
-        <h1 className='text-8xl'>60</h1>
-        <p className='mt-10 text-2xl'>Doctor Manage</p>
-      </div>
-
-      <div className="flex flex-col items-center justify-center border border-gray-600 w-60 h-60 bg-white shadow-md rounded-xl">
-        <h1 className='text-8xl'>16</h1>
-        <p className='mt-10 text-2xl'>Hospital</p>
-      </div>
-
-
+        <OnlineAppointment />
     </div>
-
   )
 }
 

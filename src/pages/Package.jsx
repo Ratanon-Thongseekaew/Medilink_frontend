@@ -118,6 +118,8 @@ console.log('formData', formData)
         programId={program?.id}
         date={formData?.date}
         time={formData?.time}
+        actionAppointment={`${formData?.date},${formData?.time}`}
+
       />
     </>
   );
