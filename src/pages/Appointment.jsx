@@ -44,7 +44,7 @@ function Appointment() {
   } = useAppointmentStore();
 
   useEffect(() => {
-    getDoctorData(doctorId);
+    getDoctorData(doctorId, token);
     setMinAndMaxDate();
   }, [doctorId]);
 

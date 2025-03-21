@@ -6,9 +6,9 @@ import {
 
 const useScheduleStore = create((set) => ({
   doctor: {},
-  actionGetDoctorDataById: async (doctorId) => {
+  actionGetDoctorDataById: async (id, token) => {
     try {
-      const rs = await actionGetDoctorById(doctorId);
+      const rs = await actionGetDoctorById(id, token);
       console.log("rs.data :>> ", rs.data);
       set({ doctor: rs.data });
     } catch (error) {
