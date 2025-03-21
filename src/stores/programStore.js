@@ -28,7 +28,7 @@ const useProgramStore = create(
         }
       },
 
-      fetchProgram: async (id,token) => {
+      fetchProgram: async (token, id) => {
         try {
           const rs = await axios.get(`${PORT}/api/program/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
