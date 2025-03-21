@@ -10,7 +10,7 @@ import LayoutAdmin from "../components/LayoutAdmin";
 import Dashboard from "../pages/Admin/Dashboard";
 import AdminHome from "../pages/Admin/AdminHome";
 import AdminUser from "../pages/Admin/AdminUser";
-import AdminOnlineStore from "../pages/Admin/AminOnlineStore";
+import AdminOnlineStore from "../pages/Admin/AdminOnlineStore";
 import AdminAppointment from "../pages/Admin/AdminAppointment";
 import AdminDoctorManage from "../pages/Admin/AdminDoctorManage";
 import AdminHospital from "../pages/Admin/AdminHospital";
