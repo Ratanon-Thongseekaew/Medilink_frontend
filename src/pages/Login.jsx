@@ -26,15 +26,21 @@ function Login() {
 
             if (!email.trim() || !password.trim()) {
                 setIsSubmitting(false)
-                return toast.error("Please fill inputs Email and Password")
+                return toast.error("Please fill in your email and password")
             }
 
             let data = await login(input)
-            toast.success("Login successfull")
+            toast.success("Login successful")
 
         } catch (error) {
-            const errMsg = error.response?.data?.error || error.message
-            toast.error(errMsg)
+            let errMsg;
+            if (error.response) {
+                errMsg = error.response.data?.message || 
+                        `Error: ${error.response.status} - ${error.response.statusText}`;
+            } else {
+                errMsg = error.message || "Login failed";
+            }
+            toast.error(errMsg);
         } finally {
             setIsSubmitting(false)
         }
