@@ -15,13 +15,21 @@ function Appointment() {
   const { doctorId } = useParams();
 
   const token = useUserStore((state) => state.token);
+  const appointmentResultData = useAppointmentStore(state => state.appointmentResult)
+  const appointmentDataID = useAppointmentStore(state => state.appointmentData)
 
   const navigate = useNavigate();
+  console.log("DataApp", appointmentResultData)
 
-  const hdlPayments = (doctorId, token) => {
+  // const hdlPayments = (doctorId, token) => {
+  //   hdlCreateAppointment(doctorId, token);
+  //   navigate("/thankyou-appointment");
+  // };
+
+  const hdlAppointment = (doctorId, token) => {
     hdlCreateAppointment(doctorId, token);
-    navigate("/thankyou-appointment");
-  };
+    document.getElementById("modalPayments").showModal()
+  }
 
   const {
     doctor,
@@ -35,6 +43,8 @@ function Appointment() {
     schedule,
     actionGetScheduleData: getScheduleData,
   } = useScheduleStore();
+
+  console.log(appointmentDataID)
 
   const {
     timeBox,
@@ -231,9 +241,10 @@ function Appointment() {
           <div className="text-center">
             <button
               className="btn btn-secondary text-lg py-6 px-6"
-              onClick={() =>
-                document.getElementById("modalPayments").showModal()
-              }
+              // onClick={() =>
+              //   document.getElementById("modalPayments").showModal()
+              // }
+              onClick={()=> hdlAppointment(doctorId, token)}
             >
               นัดหมายแพทย์
             </button>
@@ -242,11 +253,14 @@ function Appointment() {
       </div>
       {/* modal */}
       <ModalPayments
-        hdlPayments={() => hdlPayments(doctorId, token)}
+        // hdlPayments={() => hdlPayments(doctorId, token)}
         title="นัดหมายแพทย์"
-        actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
-        actionTitle="นพ. มาโนช เตชะโชควัฒน์"
+        appointmentId={appointmentResultData.id}
+        actionImage={`${doctor?.profileImg}`}
+        actionTitle={`${doctor.firstname} ${doctor.lastname}`}
         actionPrice="100 บาท"
+        date={`${selectedAppointDate.split("T")[0]}`}
+        time={`${timeBox.startTime.slice(0, 5)} - ${timeBox.endTime.slice(0, 5)}`}
         actionAppointment={`${selectedAppointDate} เวลา ${timeBox.startTime} - ${timeBox.endTime}`}
       />
     </>

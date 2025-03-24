@@ -31,16 +31,30 @@ const navigate = useNavigate()
     }
 
         return (
-            <div className="absolute top-0 z-40 w-full h-full flex flex-col items-center justify-center min-h-screen bg-base-200 text-base-content">
-            {/* Spinner */}
-            <span className="loading loading-infinity loading-lg text-primary mb-6"></span>
+            <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800 animate-fade-in px-4 absolute top-0 z-40">
+                {/* Logo */}
+                <img
+                src="https://res.cloudinary.com/dpeegtiv8/image/upload/v1741939571/logo_te6v3y.png"
+                alt="Hospital Logo"
+                className="w-64 h-24 mb-6 drop-shadow-md animate-logo-pop"
+                />
 
-            {/* Text */}
-            <h1 className="text-2xl font-bold animate-pulse">Loading, please wait...</h1>
+                {/* Spinner */}
+                <div className="relative mb-8">
+                <span className="loading loading-infinity loading-lg text-green-500 scale-125 animate-spin-slow" />
+                <div className="absolute inset-0 animate-ping-slow rounded-full border-4 border-green-300 opacity-20"></div>
+                </div>
 
-            {/* Optional Progress Bar */}
-            <progress className="progress w-56 mt-6 bg-neutral" value="40" max="100"></progress>
-        </div>
+                {/* Text */}
+                <h1 className="text-2xl font-semibold text-center text-green-700 animate-pulse">
+                กำลังโหลดข้อมูล... กรุณารอสักครู่
+                </h1>
+
+                {/* Progress Bar */}
+                <div className="w-64 h-3 bg-gray-200 rounded mt-8 overflow-hidden relative">
+                <div className="h-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 rounded animate-fill-bar-slow"></div>
+                </div>
+            </div>
         )
 }
 

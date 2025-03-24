@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import useUserStore from "../stores/userStore"
 import Button from "../components/Button"
 import { toast } from "react-toastify"
@@ -13,6 +13,7 @@ function Login() {
     const [input, setInput] = useState(userLogin)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const login = useUserStore(state => state.login)
+    const navigate = useNavigate()
 
     const hdlChange = e => {
         setInput(prv => ({ ...prv, [e.target.name]: e.target.value }))
@@ -31,6 +32,7 @@ function Login() {
 
             let data = await login(input)
             toast.success("Login successfull")
+            navigate("/")
 
         } catch (error) {
             const errMsg = error.response?.data?.error || error.message
