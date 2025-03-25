@@ -1,4 +1,4 @@
-import { MapPin, ShoppingBasket } from 'lucide-react'
+import { Calendar, Clock, MapPin, ShoppingBasket } from 'lucide-react'
 import BangkokHospital from "../assets/hospital/bangkok-hospital.jpg"
 import { Link, useParams } from 'react-router'
 import useUserStore from '../stores/userStore'
@@ -9,12 +9,16 @@ import useOrderStore from '../stores/orderStore';
 function ThankyouPackage() {
     const token = useUserStore((state) => state.token);
     const order = useOrderStore((state)=>state.order)
+    console.log("order check",order)
     const fetchOrder = useOrderStore((state) => state.fetchOrder);
-    const id = useParams()
+    const { orderId } = useParams()
     console.log("Order Store:", useOrderStore);
     useEffect(()=>{
-        fetchOrder(token, id);  
-    },[id])
+        if (token && orderId) {
+            console.log("Fetching order with ID:", orderId);
+        }
+        fetchOrder(token, orderId);  
+    },[token,orderId,fetchOrder])
     console.log("Checking fetchOrder function:", fetchOrder);
     console.log("Check order",order);
   return (
@@ -44,12 +48,19 @@ function ThankyouPackage() {
                 <div className="flex p-8 my-10 mb-18 items-center justify-between rounded-lg shadow-[0px_4px_4px_#0000000d] bg-white">
                     <div className="text-left">
                         <div className='mb-4'>
-                            <p className='text-xl font-bold text-gray-400'>ท่านได้ทำการนัดหมายกับทางเราเรียบร้อยแล้ว</p>
+                            <p className='text-xl font-bold'>ท่านได้ทำการนัดหมายกับทางเราเรียบร้อยแล้ว</p>
                             <p className='text-gray-400'>โปรดมาถึงก่อนเวลานัดหมาย 15 นาที</p>
                         </div>
                         <div className='mb-4'>
                             <p className='text-2xl font-bold'>วันที่และเวลานัดหมาย</p>
-                            <p className='text-gray-400'>18 มีนาคม 2568 เวลา 18.00 - 19.00</p>
+                            <div className="flex items-center mt-1">
+                            <Calendar className="w-5 h-5 mr-2 text-emerald-400" />
+                            <p className='text-gray-400 m-0'>{order?.orderDate.split("T")[0]}</p>
+                            </div>
+                            <div className='flex items-center mt-1'>
+                            <Clock className="w-5 h-5 mr-2 text-emerald-400" />
+                            <p className='text-gray-400'>{order?.orderDate.split("T")[1].split(".")[0]} AM</p>
+                            </div>
                         </div>
                         <div>
                             <p className='text-emerald-400 font-bold'>สถานที่นัดหมาย</p>
@@ -70,11 +81,11 @@ function ThankyouPackage() {
                     <div>
                         <div className="avatar">
                             <div className="w-36 rounded-2xl">
-                                <img src="https://storage.googleapis.com/a1aa/image/RIXFgoqmD1i4kk97B7Ap1-vLiqzlWl-j--_Mlkj7H9Q.jpg" />
+                                <img src={order?.program.profileImg} />
                             </div>
                         </div>
                         <div className='text-center mt-2'>
-                            <p className='text-lg font-bold'>แพ็กเกจตรวจสุขภาพพื้นฐาน และทั่วไป</p>
+                            <p className='text-lg font-bold'>{order.program.name}</p>
                         </div>
                     </div>
                     

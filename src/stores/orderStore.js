@@ -9,9 +9,11 @@ const PORT = "http://localhost:8888"
 const useOrderStore = create(persist(
     (set, get) => ({
       order: null,
-      fetchOrder: async (token,id) => {
+      isLoading: false,
+    error: null,
+      fetchOrder: async (token,orderId) => {
         try {
-          const rs = await axios.get(`${PORT}/api/order/${id}`, {
+          const rs = await axios.get(`${PORT}/api/order/${orderId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           set({ order: rs.data.data});
