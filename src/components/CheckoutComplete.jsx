@@ -31,7 +31,7 @@ const navigate = useNavigate()
     }
 
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800 animate-fade-in px-4 absolute top-0 z-40">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800 animate-fade-in px-4 absolute top-0 z-40 min-w-full">
                 {/* Logo */}
                 <img
                 src="https://res.cloudinary.com/dpeegtiv8/image/upload/v1741939571/logo_te6v3y.png"

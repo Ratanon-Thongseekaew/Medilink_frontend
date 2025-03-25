@@ -69,7 +69,7 @@ function MapLocations() {
     }, []);
 
     return (
-        <MapContainer center={[13.7563, 100.5018]} zoom={12} className="h-[550px] w-full">
+        <MapContainer center={[13.7563, 100.5018]} zoom={5} className="h-[450px] md:h-[550px] w-full">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {locations.map((place, index) => (
                 <Marker key={index} position={place.coords} icon={hospitalMarker}>

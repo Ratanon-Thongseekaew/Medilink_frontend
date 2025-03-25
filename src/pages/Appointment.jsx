@@ -36,8 +36,6 @@ function Appointment() {
     actionGetScheduleData: getScheduleData,
   } = useScheduleStore();
 
-  console.log(appointmentDataID)
-
   const {
     timeBox,
     hdlTimeboxChange,
@@ -57,32 +55,14 @@ function Appointment() {
   }, [selectedDate]);
 
   const days = Object.keys(schedule);
-  console.log("days :>> ", days);
 
-  //new Date(12-03)
-
-  // groupedSchedules : {
-  // "MONDAY 12 March" : [],
-  // "TUESDAY 13 March : []
-  // }
-  // Object.keys( groupedSchedules) -->["MONDAY 11 March", "TUESDAY"]
 
   const dayswithdates = days;
-
-  // console.log("doctorId :>> ", doctorId);
-
-  // console.log("dayOfWeek :>> ", dayOfWeek);
-
-  // console.log("selectedDate :>> ", selectedDate);
-
-  // console.log("doctor :>> ", doctor);
-
-  console.log("timeBox :>> ", timeBox);
 
   return (
     <>
       <div className="mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center">
-        <div className="p-6">
+        <div className="p-2 md:p-6">
           <Link
             className="bg-white border rounded-full w-11 h-11 flex justify-center items-center"
             to="/login"
@@ -108,12 +88,12 @@ function Appointment() {
 
         {/* นัดหมาย */}
         <div className="max-w-5xl mx-auto py-6">
-          <div className="flex p-10 mb-10 items-center justify-between rounded-lg shadow-[0px_4px_4px_#0000000d] bg-white">
+          <div className="flex p-6 md:p-10 mb-10 items-center justify-between rounded-lg shadow-[0px_4px_4px_#0000000d] bg-white">
             <div className="text-left">
-              <h3 className="text-3xl font-bold">
+              <h3 className="text-2xl md:text-3xl font-bold">
                 {doctor.firstname} {doctor.lastname}
               </h3>
-              <div className="border-4 border-emerald-400 my-3 rounded-2xl"></div>
+              <div className="border-2 md:border-4 border-emerald-400 my-3 rounded-2xl"></div>
               <p className="text-gray-400 my-2 font-semibold">
                 {doctor?.specialty?.specialtyName}
               </p>
@@ -122,24 +102,24 @@ function Appointment() {
               </p>
             </div>
             <div className="avatar">
-              <div className="w-36 rounded-full">
+              <div className="w-30 md:w-36 rounded-full">
                 <img src={doctor?.profileImg} />
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-6 bg-white p-10 rounded-lg shadow-[0px_4px_4px_#0000000d]">
-            <div className="flex flex-col items-start gap-1 px-4 border-r-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-white p-6 md:p-10 rounded-lg shadow-[0px_4px_4px_#0000000d]">
+            <div className="flex flex-col items-start py-4 md:py-0 gap-1 px-0 md:px-4 border-b-2 md:border-b-0 md:border-r-2">
               <Hospital className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
               <p className="font-bold">ศูนย์เฉพาะคลินิก</p>
               <p className="text-gray-400">ศูนย์โรคไต, ศูนย์เบาหวาน</p>
             </div>
-            <div className="flex flex-col items-start gap-1 px-4 border-r-2">
+            <div className="flex flex-col items-start py-4 md:py-0 gap-1 px-0 md:px-4 border-b-2 md:border-b-0 md:border-r-2">
               <Gem className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
               <p className="font-bold">ความชำนาญเฉพาะทางเฉพาะ</p>
               <p className="text-gray-400">อายุรศาสตร์</p>
             </div>
-            <div className="flex flex-col items-start gap-1 px-4">
+            <div className="flex flex-col items-start py-4 md:py-0 gap-1 px-0 md:px-4">
               <Split className="w-10 h-10 stroke-1 stroke-emerald-400 mb-4" />
               <p className="font-bold">อนุสาขา</p>
               <p className="text-gray-400">อายุรศาสตร์โรคไต</p>
@@ -173,7 +153,8 @@ function Appointment() {
               />
               <i className="fas fa-calendar-alt text-gray-500 ml-2"></i>
             </div>
-            <div className="grid grid-cols-5 text-center">
+            {/* Desktop Version */}
+            <div className="hidden md:grid grid-cols-5 text-center">
               {schedule.map((el) => {
                 const date = new Date(el.date).toISOString().split("T")[0];
                 return (
@@ -184,8 +165,6 @@ function Appointment() {
                   </>
                 );
               })}
-            </div>
-            <div className="grid grid-cols-5 text-center">
               {schedule.map((el) => {
                 return (
                   <>
@@ -216,13 +195,48 @@ function Appointment() {
                 );
               })}
             </div>
+            {/* Mobile Version */}
+            <div className="md:hidden space-y-4">
+              {schedule.map((el, index) => {
+                const date = new Date(el.date).toLocaleDateString("th-TH", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                });
+
+                return (
+                  <div key={index} className="bg-white rounded-lg shadow p-4 border">
+                    <div className="text-emerald-600 font-semibold mb-2">
+                      {changeDayLanguage(el.day)} - {date}
+                    </div>
+                    <div className="relative">
+                      <details className="w-full">
+                        <summary className="btn btn-sm w-full">
+                          {selectedAppointDate === el.date
+                            ? `${timeBox.startTime} - ${timeBox.endTime}`
+                            : "เลือกช่วงเวลา"}
+                        </summary>
+                        <ul className="mt-2 bg-base-100 rounded-box shadow border w-full z-20 p-2 space-y-1">
+                          {el.timeBox.map((timeSlot, i) => (
+                            <li
+                              key={i}
+                              className="cursor-pointer hover:bg-gray-100 p-2 rounded text-sm"
+                              onClick={() => hdlTimeboxChange(timeSlot, el.date)}
+                            >
+                              {timeSlot.startTime} - {timeSlot.endTime}
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="text-center">
             <button
               className="btn btn-secondary text-lg py-6 px-6"
-              // onClick={() =>
-              //   document.getElementById("modalPayments").showModal()
-              // }
               onClick={()=> hdlAppointment(doctorId, token)}
             >
               นัดหมายแพทย์

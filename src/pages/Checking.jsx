@@ -5,8 +5,7 @@ import { Link } from "react-router";
 
 function Checking() {
   const [step, setStep] = useState(1);
-
-  // test
+  
   const [chatReply, setChatReply] = useState(null);
   const [askReply, setAskReply] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -71,7 +70,7 @@ function Checking() {
             (text, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center w-[160px] relative"
+                className="flex flex-col items-center w-[100px] md:w-[160px] relative"
               >
                 <div
                   className={`flex justify-center items-center p-4 rounded-full w-8 h-8 text-white ${
@@ -89,7 +88,7 @@ function Checking() {
                 </p>
                 {index < 2 && (
                   <div
-                    className={`w-28 border-2 rounded-[30px] relative -top-12 left-24 ${
+                    className={`w-12 md:w-28 border-2 rounded-[30px] relative -top-12 left-16 md:left-24 ${
                       step >= index + 1 ? "border-emerald-400" : "text-gray-400"
                     }`}
                   ></div>
@@ -105,7 +104,7 @@ function Checking() {
           <form>
             {step === 1 && (
               <>
-                <div className="flex gap-4 py-2 items-start ">
+                <div className="flex flex-col md:flex-row gap-4 py-2 items-start ">
                   <label className="w-full text-left">
                     วันนี้คุณมีอาการอย่างไร
                     <input
@@ -131,8 +130,8 @@ function Checking() {
                     />
                   </label>
                 </div>
-                <div className="flex gap-4 py-2">
-                  <div className="flex gap-4 py-2 w-[50%]">
+                <div className="flex flex-col md:flex-row gap-4 py-2">
+                  <div className="flex gap-4 py-2 w-[100%] md:w-[50%]">
                     <label className="w-full text-left flex flex-col gap-4">
                       โรคประจำตัว
                       <div>
@@ -191,7 +190,7 @@ function Checking() {
                       </div>
                     </label>
                   </div>
-                  <div className="flex flex-col gap-4 py-2 items-start w-[50%]">
+                  <div className="flex flex-col gap-4 py-2 items-start w-full md:w-[50%]">
                     <label className="w-full text-left">
                       ที่อยู่หรือปัจจุบันท่านอยู่ที่ไหน
                       <input
@@ -219,7 +218,7 @@ function Checking() {
               </>
             )}
             {step === 2 && (
-              <div className="p-6 md:px-10 lg:px-20 xl:px-32">
+              <div className="md:px-10 lg:px-20 xl:px-32">
                 <div className="pb-8">
                   <h2 className="text-2xl font-semibold text-emerald-500">
                     ผลวิเคราะห์อาการ
@@ -248,12 +247,21 @@ function Checking() {
                             .map((line) => line.trim()); // แยกแต่ละบรรทัด
                           const title = lines.shift(); // หัวข้อของหมวดหมู่
 
+                          // สร้าง array ของสีสำหรับ border
+                          const borderColors = ["border-emerald-400", "border-yellow-400", "border-red-400"];
+                          const borderColorClass = borderColors[index % borderColors.length]; // ถ้ามีเกิน 3 จะวน
+
+                          const headerColors = ["text-emerald-500", "text-yellow-500", "text-red-500"];
+                          const headerColorClass = headerColors[index % headerColors.length]; // ถ้ามีเกิน 3 จะวน
+
+
+
                           return (
                             <div
                               key={index}
-                              className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-emerald-400 text-left"
+                              className={`bg-white p-6 rounded-lg shadow-lg border-l-4 ${borderColorClass} text-left`}
                             >
-                              <h3 className="text-xl font-semibold text-emerald-500">
+                              <h3 className={`text-xl font-semibold ${headerColorClass}`}>
                                 {title}
                               </h3>
                               <ul className="list-disc list-inside mt-2 text-gray-700">

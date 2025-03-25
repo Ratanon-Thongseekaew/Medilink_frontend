@@ -44,7 +44,7 @@ function UserProfile() {
   };
 
   return (
-    <div className="p-4 ml-50">
+    <div className="pl-70 gap-30 w-full pt-8 pb-8 pr-8">
       <h1 className="text-2xl font-bold mb-4">User Profile</h1>
       <div className="flex items-center mb-4">
         <img

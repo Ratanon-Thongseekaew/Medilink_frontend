@@ -45,9 +45,9 @@ function AdminCreatePackage() {
   };
 
   return (
-    <>
+    <div className='pl-70 gap-30 w-full pt-8 pb-8 pr-8'>
       <form onSubmit={hdlSubmit}>
-        <div className="p-6 ml-55 bg-white rounded-lg shadow-md">
+        <div className="p-6 bg-white rounded-lg shadow-md">
           <h1 className="text-2xl font-bold mb-4">ข้อมูลแพ็กเกจ</h1>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
@@ -73,7 +73,7 @@ function AdminCreatePackage() {
           </div>
         </div>
 
-        <div className="p-6 ml-55 mt-5 bg-white rounded-lg shadow-md">
+        <div className="p-6 mt-5 bg-white rounded-lg shadow-md">
           <div className="mb-4 ">
             <h2 className="text-lg font-semibold">รายละเอียดแพ็กเกจ</h2>
 
@@ -92,7 +92,7 @@ function AdminCreatePackage() {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 
