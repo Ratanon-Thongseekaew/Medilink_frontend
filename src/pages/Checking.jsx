@@ -1,3 +1,4 @@
+import SkeletonCard from "../components/SkeletonCard";
 import { Activity, CalendarDays } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
@@ -46,7 +47,7 @@ function Checking() {
     if (step < 3) setStep(step + 1);
   };
 
-  console.log("askReply", askReply);
+  // console.log("askReply", askReply);
 
   return (
     <div className="mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center">
@@ -224,9 +225,17 @@ function Checking() {
                     ผลวิเคราะห์อาการ
                   </h2>
                   {loading ? (
-                    <p className="mt-4 text-gray-600">
+                    <>
+                     <p className="mt-4 text-gray-600 mb-4">
                       ระบบกำลังวิเคราะห์อาการของคุณ โปรดรอสักครู่...
-                    </p>
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        <SkeletonCard />
+                        <SkeletonCard />
+                        <SkeletonCard />
+                      </div>
+                      
+                    </>
                   ) : (
                     <div className="mt-4 space-y-6">
                       {chatReply
@@ -257,15 +266,15 @@ function Checking() {
                             </div>
                           );
                         })}
+                        <button
+                          onClick={handleNextStep}
+                          className="btn btn-secondary text-lg py-6 px-6"
+                        >
+                          นัดหมายแพทย์ หรือดูแพ็กเกจ
+                        </button>
                     </div>
                   )}
                 </div>
-                <button
-                  onClick={handleNextStep}
-                  className="btn btn-secondary text-lg py-6 px-6"
-                >
-                  นัดหมายแพทย์ หรือดูแพ็กเกจ
-                </button>
               </div>
             )}
 
@@ -293,7 +302,7 @@ function Checking() {
                           width="100"
                           height="100"
                         />
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">{`นพ. ${doctor.firstname} ${doctor.lastname}`}</h4>
+                        <h4 className="text-lg font-bold text-gray-800 mb-2">{`${doctor.firstname} ${doctor.lastname}`}</h4>
                         <p className="text-sm text-gray-400 mb-4">{`${doctor.specialty}`}</p>
                         <span className="bg-emerald-400 text-white py-1 px-3 rounded-full text-sm">
                           {doctor.hospital}
@@ -342,7 +351,7 @@ function Checking() {
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="text-lg font-bold text-emerald-400">
-                            {pkg.price} บาท
+                            {Number(pkg.price).toLocaleString()} บาท
                           </span>
                           <Link
                             to={`/package/${pkg.id}`}

@@ -2,12 +2,12 @@ import VisaImage from "../assets/payment/visa-payment.jpg";
 import PromptPay from "../assets/payment/promptpay.jpg";
 import { useEffect, useState } from "react";
 import useUserStore from "../stores/userStore";
-import { checkOut, createOrder } from "../stores/checkoutStore";
+import { checkOut, checkOutAppointment, createOrder, createOrderAppointment } from "../stores/checkoutStore";
 import { loadStripe } from '@stripe/stripe-js';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 
 function ModalPayments(props) {
-  const { hdlPayments, title, actionImage, actionTitle, actionPrice, actionAppointment, programId, date, time } = props;
+  const { hdlPayments, title, actionImage, actionTitle, actionPrice, actionAppointment, programId, date, time, appointmentId } = props;
   const [showPayment, setShowPayment] = useState(false);
   const token = useUserStore(state => state.token);
   const [clientSecret, setClientSecret] = useState(null);
@@ -16,19 +16,50 @@ function ModalPayments(props) {
 
   const stripePromise = loadStripe("pk_test_51R1NHoFWX5EVFtiE0XvV80N3RkykDsTAw3rIGsk3VHdGRPh8H9CfVUPPxVCmdgzbKJUgnsapNS9vcG4FOy7JZBbH00iEmZbJRN");
 
+  // const fetchClientSecret = async (id) => {
+  //   try {
+  //     const res = await checkOut(token, id);
+  //     console.log('ClientSecret:', res.data.clientSecret);
+  //     setClientSecret(res.data.clientSecret);
+  //   } catch (error) {
+  //     console.error("Error fetching client secret:", error);
+  //   }
+  // };
   const fetchClientSecret = async (id) => {
-    try {
-      const res = await checkOut(token, id);
-      console.log('ClientSecret:', res.data.clientSecret);
-      setClientSecret(res.data.clientSecret);
-    } catch (error) {
-      console.error("Error fetching client secret:", error);
+    let res;
+    if (programId) {
+      res = await checkOut(token, id); // Program
+    } else if (appointmentId) {
+      res = await checkOutAppointment(token, id); // Appointment
     }
+    setClientSecret(res.data.clientSecret);
   };
+  
+
+  // const handleCreateOrder = async () => {
+  //   try {
+  //     const orderResponse = await createOrder(token, programId, date, time);
+  //     console.log("Order Created:", orderResponse);
+  //     setOrderId(orderResponse.id);
+  //   } catch (error) {
+  //     console.error("Error creating order:", error);
+  //   }
+  // };
 
   const handleCreateOrder = async () => {
     try {
-      const orderResponse = await createOrder(token, programId, date, time);
+      let orderResponse;
+      
+      if (programId) {
+        // ถ้าเป็นการซื้อ Package
+        orderResponse = await createOrder(token, programId, date, time);
+      } else if (appointmentId) {
+        // ถ้าเป็นนัดหมายแพทย์
+        orderResponse = await createOrderAppointment(token, appointmentId, date, time); 
+      } else {
+        throw new Error("Missing programId or appointmentId");
+      }
+  
       console.log("Order Created:", orderResponse);
       setOrderId(orderResponse.id);
     } catch (error) {
