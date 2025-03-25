@@ -342,7 +342,7 @@ function Checking() {
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="text-lg font-bold text-emerald-400">
-                            {pkg.price}
+                            {pkg.price} บาท
                           </span>
                           <Link
                             to={`/package/${pkg.id}`}

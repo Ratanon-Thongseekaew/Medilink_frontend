@@ -13,7 +13,7 @@ function ThankyouPackage() {
     const id = useParams()
     console.log("Order Store:", useOrderStore);
     useEffect(()=>{
-        fetchOrder(token, id);
+        fetchOrder(token, id);  
     },[id])
     console.log("Checking fetchOrder function:", fetchOrder);
     console.log("Check order",order);
