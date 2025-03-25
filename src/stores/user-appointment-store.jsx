@@ -10,6 +10,7 @@ const useAppointmentStore = create((set, get) => ({
   },
   selectedDate: "",
   appointmentData: {},
+  appointmentResult: {},
   hdlTimeboxChange: (timeSlot, date) => {
     console.log("timeSlot :>> ", timeSlot);
     set({ timeBox: timeSlot, selectedDate: date });
@@ -17,10 +18,12 @@ const useAppointmentStore = create((set, get) => ({
   // hdlCreateAppointment: (doctorId, timeBox, selectedDate) => {
   //   createAppointment(doctorId, { ...timeBox, selectedDate });
   // },
-  hdlCreateAppointment: (doctorId, token) => {
+  hdlCreateAppointment: async (doctorId, token) => {
     const timeBox = get().timeBox;
     const selectedDate = get().selectedDate;
-    createAppointment(doctorId, { ...timeBox, selectedDate }, token);
+    // createAppointment(doctorId, { ...timeBox, selectedDate }, token);
+    const result = await createAppointment(doctorId, { ...timeBox, selectedDate }, token);
+    set({appointmentResult: result.data.appointment})
   },
 }));
 

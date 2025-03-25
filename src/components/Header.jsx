@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router'
 import useUserStore from '../stores/userStore'
 
 function Header() {
   const logout = useUserStore(state => state.logout)
+  const navigate = useNavigate()
 
     const hdlLogout = () => {
         logout()
+        navigate("/")
     }
+
   return (
     <div className='flex justify-between p-4'>
         <img 

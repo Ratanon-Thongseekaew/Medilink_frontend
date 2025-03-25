@@ -1,5 +1,5 @@
 import { CalendarDays, ChevronLeft, Gem, Hospital, Split } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import BangkokHospital from "../assets/hospital/bangkok-hospital.jpg";
 import ModalPayments from "../components/ModalPayments";
 //pheem
@@ -15,13 +15,13 @@ function Appointment() {
   const { doctorId } = useParams();
 
   const token = useUserStore((state) => state.token);
+  const appointmentResultData = useAppointmentStore(state => state.appointmentResult)
+  const appointmentDataID = useAppointmentStore(state => state.appointmentData)
 
-  const navigate = useNavigate();
-
-  const hdlPayments = (doctorId, token) => {
+  const hdlAppointment = (doctorId, token) => {
     hdlCreateAppointment(doctorId, token);
-    navigate("/thankyou-appointment");
-  };
+    document.getElementById("modalPayments").showModal()
+  }
 
   const {
     doctor,
@@ -35,6 +35,8 @@ function Appointment() {
     schedule,
     actionGetScheduleData: getScheduleData,
   } = useScheduleStore();
+
+  console.log(appointmentDataID)
 
   const {
     timeBox,
@@ -115,7 +117,7 @@ function Appointment() {
               <p className="text-gray-400 my-2 font-semibold">
                 {doctor?.specialty?.specialtyName}
               </p>
-              <p className="text-center py-2 bg-emerald-400 text-white rounded-2xl w-40">
+              <p className="text-center py-2 bg-emerald-400 text-white rounded-2xl w-48">
                 {doctor?.hospital?.name}
               </p>
             </div>
@@ -175,15 +177,18 @@ function Appointment() {
               {schedule.map((el) => {
                 const date = new Date(el.date).toISOString().split("T")[0];
                 return (
-                  <div className="bg-emerald-400 text-white p-2">
-                    {changeDayLanguage(el.day)} <br /> {date}
-                  </div>
+                  <>
+                    <div className="bg-emerald-400 text-white p-2">
+                      {changeDayLanguage(el.day)} <br /> {date}
+                    </div>
+                  </>
                 );
               })}
             </div>
             <div className="grid grid-cols-5 text-center">
               {schedule.map((el) => {
                 return (
+                  <>
                   <div className="dropdown dropdown-bottom dropdown-end">
                     <div tabIndex={0} role="button" className="btn m-1">
                       {selectedAppointDate === el.date
@@ -196,34 +201,18 @@ function Appointment() {
                     >
                       {el.timeBox.map((timeSlot) => {
                         return (
+                          <>
                           <li
                             onClick={() => hdlTimeboxChange(timeSlot, el.date)}
                           >
                             {timeSlot.startTime} - {timeSlot.endTime}
                           </li>
+                          </>
                         );
                       })}
                     </ul>
                   </div>
-                  // <div className="border border-gray-300 p-2">
-                  //   <select
-                  //     defaultValue="Pick a color"
-                  //     className="select bg-white"
-                  //     onChange={(e) =>
-                  //       hdlTimeboxChange(e.target.value, el.date)
-                  //     }
-                  //   >
-                  //     {el.timeBox.map((timeSlot) => {
-                  //       return (
-                  //         <option
-                  //           // onChange={() => hdlTimeboxChange(timeSlot, el.date)}
-                  //         >
-                  //           {timeSlot.startTime} - {timeSlot.endTime}
-                  //         </option>
-                  //       );
-                  //     })}
-                  //   </select>
-                  // </div>
+                  </>
                 );
               })}
             </div>
@@ -231,9 +220,10 @@ function Appointment() {
           <div className="text-center">
             <button
               className="btn btn-secondary text-lg py-6 px-6"
-              onClick={() =>
-                document.getElementById("modalPayments").showModal()
-              }
+              // onClick={() =>
+              //   document.getElementById("modalPayments").showModal()
+              // }
+              onClick={()=> hdlAppointment(doctorId, token)}
             >
               นัดหมายแพทย์
             </button>
@@ -242,11 +232,14 @@ function Appointment() {
       </div>
       {/* modal */}
       <ModalPayments
-        hdlPayments={() => hdlPayments(doctorId, token)}
+        // hdlPayments={() => hdlPayments(doctorId, token)}
         title="นัดหมายแพทย์"
-        actionImage="https://storage.googleapis.com/a1aa/image/IXKSkIDsLwXnpPpPgnoPxy88Dv6JD6FNoaxrsbGEOEI.jpg"
-        actionTitle="นพ. มาโนช เตชะโชควัฒน์"
+        appointmentId={appointmentResultData.id}
+        actionImage={`${doctor?.profileImg}`}
+        actionTitle={`${doctor.firstname} ${doctor.lastname}`}
         actionPrice="100 บาท"
+        date={`${selectedAppointDate.split("T")[0]}`}
+        time={`${timeBox.startTime.slice(0, 5)} - ${timeBox.endTime.slice(0, 5)}`}
         actionAppointment={`${selectedAppointDate} เวลา ${timeBox.startTime} - ${timeBox.endTime}`}
       />
     </>

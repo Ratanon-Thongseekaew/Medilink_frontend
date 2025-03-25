@@ -28,6 +28,7 @@ import CheckoutComplete from "../components/CheckoutComplete";
 import UserCreateProfile from "../pages/Admin/userProfile/UserCreateProfile";
 import DoctorCreateProfile from "../pages/Admin/doctor/DoctorCreateProfile";
 import HospitalCreateProfile from "../pages/Admin/hospital/HospitalCreateProfile";
+import CheckoutAppoinmentComplete from "../components/CheckoutAppointmentComplete";
 
 const guestRouter = createBrowserRouter([
     { path: "/", element: <Home /> },
@@ -46,8 +47,9 @@ const userRouter = createBrowserRouter([
         { path: "/appointment/:doctorId", element: <Appointment /> },
         { path: "/select-doctor", element: <SelectDoctor /> },
         { path: "/thankyou-appointment", element: <ThankyouAppointment /> },
-                 {path: "/checkout", element: <Checkout />},
-   {path: "/checkout-complete/:session", element: <CheckoutComplete />},
+        {path: "/checkout", element: <Checkout />},
+        {path: "/checkout-complete/:session", element: <CheckoutComplete />},
+        {path: "/appointment-checkout-complete/:session", element: <CheckoutAppoinmentComplete />},
         { path: "/thankyou-package", element: <ThankyouPackage /> },
         { path: "/package/:id", element: <Package /> },
         { path: "*", element: <Navigate to="/" /> },
