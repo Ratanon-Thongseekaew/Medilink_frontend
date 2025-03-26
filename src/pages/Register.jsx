@@ -62,16 +62,16 @@ function Register() {
 
     return (
         <div className="bg-slate-100 flex min-h-screen">
-            <div className="pt-16 w-[50%]">
-                <div className="p-6">
+            <div className="pt-2 md:pt-16 w-[100%] md:w-[50%]">
+                <div className="p-4 md:p-6">
                     <Link className="bg-white border rounded-full w-11 h-11 flex justify-center items-center" to="/login">
                         <ChevronLeft className="w-6 h-6" />
                     </Link>
                 </div>
-                <div className="p-6 md:px-10 lg:px-20 xl:px-[120px]">
-                    <h1 className="text-4xl font-semibold text-center py-6 text-emerald-500">สมัครสมาชิก</h1>
+                <div className="p-6 pt-2 md:px-10 lg:px-20 xl:px-[120px]">
+                    <h1 className="text-4xl font-semibold text-center py-2 md:py-6 text-emerald-500">สมัครสมาชิก</h1>
                     <form onSubmit={hdlRegister}>
-                        <div className="flex gap-4 py-2">
+                        <div className="flex flex-col md:flex-row gap-4 py-2">
                             <input
                                 type="email"
                                 placeholder="Email"
@@ -89,7 +89,7 @@ function Register() {
                                 onChange={hdlChange}
                             />
                         </div>
-                        <div className="flex gap-4 py-2">
+                        <div className="flex flex-col md:flex-row gap-4 py-2">
                             <input
                                 type="password"
                                 placeholder="Confirm Password"
@@ -107,7 +107,7 @@ function Register() {
                                 onChange={hdlChange}
                             />
                         </div>
-                        <div className="flex gap-4 py-2">
+                        <div className="flex flex-col md:flex-row gap-4 py-2">
                             <input
                                 type="text"
                                 placeholder="firstname"
@@ -132,8 +132,11 @@ function Register() {
                          />
                     </form>
                 </div>
+                <div className="md:hidden h-[400px] w-full pt-12">
+                    <img className="h-full w-full object-cover object-center" src="https://res.cloudinary.com/dhzksppsh/image/upload/v1741774066/register_w0dfyg.jpg" />
+                </div>
             </div>
-            <div className="w-[50%] relative">
+            <div className="hidden md:flex w-[50%] relative">
                 <img className="absolute w-full h-full object-cover object-center" src="https://res.cloudinary.com/dhzksppsh/image/upload/v1741774066/register_w0dfyg.jpg" />
             </div>
         </div>

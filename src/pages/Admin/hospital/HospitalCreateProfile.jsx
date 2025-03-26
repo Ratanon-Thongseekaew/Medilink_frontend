@@ -50,7 +50,7 @@ function HospitalCreateProfile() {
         }
     }
     return (
-        <div className="p-4 ml-50">
+        <div className="pl-70 gap-30 w-full pt-8 pb-8 pr-8">
             <form onSubmit={hdlSubmit}>
                 <div className="bg-white shadow rounded-lg p-4 mb-4">
                     <div className="flex">

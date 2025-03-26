@@ -19,7 +19,25 @@ function OnlineAppointment() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {Array.from({length :6}).map((_,index) => (
+                        <tr key={index}>
+                            <td className="py-2">01</td>
+                            <td className="py-2">Natiya Kitipon</td>
+                            <td className="py-2">20 May 5:30pm</td>
+                            <td className="py-2">45</td>
+                            <td className="py-2">Female</td>
+                            <td className="py-2">นพ. สมชาย พานิช</td>
+                            <td className="py-2">
+                                <button className="text-teal-500">
+                                    <i className="fas fa-edit"></i>
+                                </button>
+                                <button className="text-red-500 ml-2">
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                    {/* <tr>
                         <td className="py-2">01</td>
                         <td className="py-2">Natiya</td>
                         <td className="py-2">20 May 5:30pm</td>
@@ -34,7 +52,7 @@ function OnlineAppointment() {
                                 <i className="fas fa-trash"></i>
                             </button>
                         </td>
-                    </tr>
+                    </tr> */}
                     {/* Repeat for other appointments */}
                 </tbody>
             </table>

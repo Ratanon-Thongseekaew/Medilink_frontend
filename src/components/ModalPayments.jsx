@@ -93,7 +93,7 @@ function ModalPayments(props) {
         <h3 className="font-bold text-2xl text-emerald-400 text-center">Payment</h3>
         <p className="pb-2 text-center">{title}</p>
 
-        <div className="max-w-md mx-auto p-6 rounded-lg">
+        <div className="max-w-md mx-auto p-0 md:p-6 rounded-lg">
           <div className="flex items-center mb-4 border p-4 rounded-2xl">
             <div className="avatar">
               <div className="w-24 h-24 rounded-full mr-4">

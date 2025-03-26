@@ -31,7 +31,7 @@ console.log('formData', formData)
   return (
     <>
       <div className="mx-auto container px-4 sm:px-6 lg:px-8 pb-16 text-center">
-        <div className="p-6">
+        <div className="p-2 md:p-6">
           <Link
             className="bg-white border rounded-full w-11 h-11 flex justify-center items-center"
             to="/login"
