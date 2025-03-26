@@ -13,7 +13,7 @@ function Package() {
   const program = useProgramStore((state) => state.program);
   const { id } = useParams();
   const hdlPayments = () => {
-    navigate("/thankyou-package");
+    navigate(`/thankyou-package`);
   };
 
   const [formData, setFormData] = useState({

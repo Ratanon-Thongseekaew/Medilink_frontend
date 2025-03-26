@@ -11,3 +11,12 @@ export const createAppointment = async (doctorId, data, token) => {
   );
   return rs
 };
+
+
+export const getAppointment = async(appoitnmentId, token)=>{
+  try {
+    const rs = await axios.get()
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -15,12 +15,16 @@ const navigate = useNavigate()
 
     const fetchPayment = async () => {
         try {
-
             const res = await checkOutStatus(token, session)
             setStatus(res.data.status)
             console.log(res);
             console.log("success", res.data.message);
-        navigate('/thankyou-package')
+            if (res.data && res.data.order) {
+                navigate(`/thankyou-package/${res.data.order}`)
+            } else {
+                console.error("No orderId found in response:", res.data)
+                
+            }
         } catch (error) {
             console.log(error);
         }
