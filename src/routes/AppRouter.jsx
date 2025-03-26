@@ -50,7 +50,7 @@ const userRouter = createBrowserRouter([
         {path: "/checkout", element: <Checkout />},
         {path: "/checkout-complete/:session", element: <CheckoutComplete />},
         {path: "/appointment-checkout-complete/:session", element: <CheckoutAppoinmentComplete />},
-        { path: "/thankyou-package", element: <ThankyouPackage /> },
+        { path: "/thankyou-package/:orderId", element: <ThankyouPackage /> },
         { path: "/package/:id", element: <Package /> },
         { path: "*", element: <Navigate to="/" /> },
       ],

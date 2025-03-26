@@ -17,6 +17,7 @@ const useUserStore = create(
           return rs.data;
         } catch (error) {
           console.log(error);
+          throw error
         }
       },
       registerUser: async (input) => {
